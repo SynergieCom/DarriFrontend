@@ -11,7 +11,7 @@ import AuthLayout from "./layouts/Auth.js";
 import AdminLayout from "./layouts/Admin.js";
 
 function App() {
-    const user = true;
+    const user = false;
     return (
         <>
             <BrowserRouter>
