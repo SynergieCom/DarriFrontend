@@ -69,7 +69,7 @@ function Widgets() {
                               alt="..."
                               className="img-raised"
                               src={
-                                require("../assets/img/faces/ayo-ogunseinde-2.jpg")
+                                require("../../assets/img/faces/ayo-ogunseinde-2.jpg")
                                   .default
                               }
                             />
@@ -127,7 +127,7 @@ function Widgets() {
                               alt="..."
                               className="img-raised"
                               src={
-                                require("../assets/img/faces/erik-lucatero-2.jpg")
+                                require("../../assets/img/faces/erik-lucatero-2.jpg")
                                   .default
                               }
                             />
@@ -185,7 +185,7 @@ function Widgets() {
                               alt="..."
                               className="img-raised"
                               src={
-                                require("../assets/img/faces/kaci-baum-2.jpg")
+                                require("../../assets/img/faces/kaci-baum-2.jpg")
                                   .default
                               }
                             />
@@ -243,7 +243,7 @@ function Widgets() {
                               alt="..."
                               className="img-raised"
                               src={
-                                require("../assets/img/faces/joe-gardner-2.jpg")
+                                require("../../assets/img/faces/joe-gardner-2.jpg")
                                   .default
                               }
                             />
@@ -542,7 +542,7 @@ function Widgets() {
                       alt="..."
                       className="img"
                       src={
-                        require("../assets/img/faces/joe-gardner-2.jpg").default
+                        require("../../assets/img/faces/joe-gardner-2.jpg").default
                       }
                     />
                   </a>

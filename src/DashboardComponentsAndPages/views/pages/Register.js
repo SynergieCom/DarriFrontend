@@ -158,7 +158,7 @@ function Register() {
         className="full-page-background"
         style={{
           backgroundImage: `url(${
-            require("../../assets/img/bg/jan-sendereks.jpg").default
+            require("../../../assets/img/bg/jan-sendereks.jpg").default
           })`,
         }}
       />

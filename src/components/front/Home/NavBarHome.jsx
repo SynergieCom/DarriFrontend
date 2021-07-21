@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-const Mainnav = () => {
+const NavBarHome = () => {
+
     const click = (e) => {
         return e.preventDefault()
     }
@@ -152,10 +153,17 @@ const Mainnav = () => {
                                                 </ul>
                                             </div>
                                         </div>
+
+                                        <div className="pt-header-info-box">
+                                            <div className="pt-menu-search-block">
+                                                <a href="/Login">Login</a>
+                                            </div>
+                                        </div>
+
                                         <div className="pt-header-info-box">
                                             <div className="pt-menu-search-block">
                                                 <a href="#!" onClick={click} id="pt-seacrh-btn"><i
-                                                    className="fa fa-search"></i></a>
+                                                    className="fa fa-search"/></a>
                                                 <div className="pt-search-form">
                                                     <form role="search" method="get" className="search-form"
                                                           onSubmit={click}>
@@ -186,4 +194,4 @@ const Mainnav = () => {
     );
 
 }
-export default Mainnav;
+export default NavBarHome;

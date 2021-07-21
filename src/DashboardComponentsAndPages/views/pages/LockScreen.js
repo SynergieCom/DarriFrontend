@@ -45,7 +45,7 @@ function LockScreen() {
             <CardHeader>
               <img
                 alt="..."
-                src={require("../../assets/img/faces/joe-gardner-2.jpg").default}
+                src={require("../../../assets/img/faces/joe-gardner-2.jpg").default}
               />
             </CardHeader>
             <CardBody>
@@ -76,7 +76,7 @@ function LockScreen() {
         className="full-page-background"
         style={{
           backgroundImage: `url(${
-            require("../../assets/img/bg/bruno-abatti.jpg").default
+            require("../../../assets/img/bg/bruno-abatti.jpg").default
           })`,
         }}
       />

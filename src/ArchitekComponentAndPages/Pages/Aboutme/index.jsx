@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../../Loader';
+import Loader from '../../../components/front/Loader';
 import Nav from '../../Navigationbar/Navigationbar-one-main';
 import Banner from '../../Banner';
 import Aboutus from '../../Aboutus/Aboutus-three';
@@ -9,10 +9,10 @@ import Counter from '../../Counter/Counter-three';
 import Pricing from './Pricing';
 import Client from '../../Client/Client-four';
 import Blog from '../../Blog';
-import Sidebar from "../../Sidebar";
-import Action from '../../Action';
-import Footer from '../../Footer';
-import Scrolltop from '../../ScrollTop';
+import Sidebar from "../../../components/front/Sidebar";
+import Action from '../../../components/front/Action';
+import Footer from '../../../components/front/Footer';
+import Scrolltop from '../../../components/front/ScrollTop';
 const Construction = () => {
     return (
         <>

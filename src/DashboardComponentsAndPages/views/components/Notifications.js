@@ -402,7 +402,7 @@ function Notifications() {
                                   alt="..."
                                   className="rounded img-raised"
                                   src={
-                                    require("../../assets/img/bg/daniel-olahs.jpg")
+                                    require("../../../assets/img/bg/daniel-olahs.jpg")
                                       .default
                                   }
                                 />
@@ -429,7 +429,7 @@ function Notifications() {
                                   alt="..."
                                   className="rounded img-raised"
                                   src={
-                                    require("../../assets/img/bg/david-marcu.jpg")
+                                    require("../../../assets/img/bg/david-marcu.jpg")
                                       .default
                                   }
                                 />

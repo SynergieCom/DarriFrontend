@@ -1,12 +1,12 @@
 import React from 'react';
-import Loader from '../../Loader';
-import Sidebar from '../../Sidebar';
+import Loader from '../../../components/front/Loader';
+import Sidebar from '../../../components/front/Sidebar';
 import Nav from '../../Navigationbar/Navigationbar-one-main';
 import Banner from '../../Banner';
 import Blog from './Blog';
-import Action from '../../Action';
-import Footer from '../../Footer';
-import ScrollTop from '../../ScrollTop';
+import Action from '../../../components/front/Action';
+import Footer from '../../../components/front/Footer';
+import ScrollTop from '../../../components/front/ScrollTop';
 const ThreeColumns = () => {
     return (
         <>

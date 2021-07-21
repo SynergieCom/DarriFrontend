@@ -1,14 +1,14 @@
 import React from 'react';
-import Loader from '../../Loader';
+import Loader from '../../../components/front/Loader';
 import Nav from '../../Navigationbar/Navigationbar-one-main';
 import Banner from '../../Banner';
 import Team from '../../Team/Team-one';
 import Count from '../../Counter/Counter-three';
 import Blog from '../../Blog';
-import Sidebar from "../../Sidebar";
-import Action from '../../Action';
-import Footer from '../../Footer';
-import Scrolltop from '../../ScrollTop';
+import Sidebar from "../../../components/front/Sidebar";
+import Action from '../../../components/front/Action';
+import Footer from '../../../components/front/Footer';
+import Scrolltop from '../../../components/front/ScrollTop';
 const Ourteam = () => {
     return (
         <>

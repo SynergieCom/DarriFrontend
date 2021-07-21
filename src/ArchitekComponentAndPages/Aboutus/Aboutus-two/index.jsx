@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Aboutus = () => {
+const Aboutus2 = () => {
     return(
     <>
     <section className="about pt-bg-light section-style">
@@ -99,4 +99,4 @@ const Aboutus = () => {
     );
 
 }
-export default Aboutus;
+export default Aboutus2;

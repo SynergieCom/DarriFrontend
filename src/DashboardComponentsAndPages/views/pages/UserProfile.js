@@ -41,7 +41,7 @@ function UserProfile() {
               <div className="image">
                 <img
                   alt="..."
-                  src={require("../../assets/img/bg/damir-bosnjak.jpg").default}
+                  src={require("../../../assets/img/bg/damir-bosnjak.jpg").default}
                 />
               </div>
               <CardBody>
@@ -50,7 +50,7 @@ function UserProfile() {
                     <img
                       alt="..."
                       className="avatar border-gray"
-                      src={require("../../assets/img/mike.jpg").default}
+                      src={require("../../../assets/img/mike.jpg").default}
                     />
                     <h5 className="title">Chet Faker</h5>
                   </a>
@@ -101,7 +101,7 @@ function UserProfile() {
                             alt="..."
                             className="img-circle img-no-padding img-responsive"
                             src={
-                              require("../../assets/img/faces/ayo-ogunseinde-2.jpg")
+                              require("../../../assets/img/faces/ayo-ogunseinde-2.jpg")
                                 .default
                             }
                           />
@@ -133,7 +133,7 @@ function UserProfile() {
                             alt="..."
                             className="img-circle img-no-padding img-responsive"
                             src={
-                              require("../../assets/img/faces/joe-gardner-2.jpg")
+                              require("../../../assets/img/faces/joe-gardner-2.jpg")
                                 .default
                             }
                           />
@@ -165,7 +165,7 @@ function UserProfile() {
                             alt="..."
                             className="img-circle img-no-padding img-responsive"
                             src={
-                              require("../../assets/img/faces/clem-onojeghuo-2.jpg")
+                              require("../../../assets/img/faces/clem-onojeghuo-2.jpg")
                                 .default
                             }
                           />

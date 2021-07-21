@@ -16,7 +16,7 @@
 */
 import React from "react";
 
-import defaultImage from "../../assets/img/default-avatar.png";
+import defaultImage from "../../../assets/img/default-avatar.png";
 
 function PictureUpload(props) {
   const [fileState, setFileState] = React.useState(null);

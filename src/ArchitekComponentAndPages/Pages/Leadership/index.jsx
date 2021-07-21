@@ -1,14 +1,14 @@
 import React from 'react';
-import Loader from '../../Loader';
+import Loader from '../../../components/front/Loader';
 import Nav from '../../Navigationbar/Navigationbar-one-main';
 import Banner from '../../Banner';
 import Team from '../../Team/Team-one';
 import Process from '../../Process/Process-three';
-import Sidebar from "../../Sidebar";
+import Sidebar from "../../../components/front/Sidebar";
 import Service from '../../Services/Service-two';
-import Action from '../../Action';
-import Footer from '../../Footer';
-import Scrolltop from '../../ScrollTop';
+import Action from '../../../components/front/Action';
+import Footer from '../../../components/front/Footer';
+import Scrolltop from '../../../components/front/ScrollTop';
 const Leadership = () => {
     return (
         <>

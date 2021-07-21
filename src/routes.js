@@ -1,4 +1,4 @@
-import Dashboard from "../src/views/Dashboard.js";
+import Dashboard from "./DashboardComponentsAndPages/views/Dashboard.js";
 
 
 const routes = [

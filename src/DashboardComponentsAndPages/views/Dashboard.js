@@ -339,7 +339,7 @@ function Dashboard() {
                               <img
                                 alt="..."
                                   // eslint-disable-next-line no-undef
-                                src={require("../assets/img/flags/US.png").default}
+                                src={require("../../assets/img/flags/US.png").default}
                               />
                             </div>
                           </td>
@@ -353,7 +353,7 @@ function Dashboard() {
                               <img
                                 alt="..."
                                   // eslint-disable-next-line no-undef
-                                src={require("../assets/img/flags/DE.png").default}
+                                src={require("../../assets/img/flags/DE.png").default}
                               />
                             </div>
                           </td>
@@ -367,7 +367,7 @@ function Dashboard() {
                               <img
                                 alt="..."
                                   // eslint-disable-next-line no-undef
-                                src={require("../assets/img/flags/AU.png").default}
+                                src={require("../../assets/img/flags/AU.png").default}
                               />
                             </div>
                           </td>
@@ -381,7 +381,7 @@ function Dashboard() {
                               <img
                                 alt="..."
                                   // eslint-disable-next-line no-undef
-                                src={require("../assets/img/flags/GB.png").default}
+                                src={require("../../assets/img/flags/GB.png").default}
                               />
                             </div>
                           </td>
@@ -395,7 +395,7 @@ function Dashboard() {
                               <img
                                 alt="..."
                                   // eslint-disable-next-line no-undef
-                                src={require("../assets/img/flags/RO.png").default}
+                                src={require("../../assets/img/flags/RO.png").default}
                               />
                             </div>
                           </td>
@@ -409,7 +409,7 @@ function Dashboard() {
                               <img
                                 alt="..."
                                   // eslint-disable-next-line no-undef
-                                src={require("../assets/img/flags/BR.png").default}
+                                src={require("../../assets/img/flags/BR.png").default}
                               />
                             </div>
                           </td>
@@ -481,7 +481,7 @@ function Dashboard() {
                               className="img-raised"
                               src={
                                 // eslint-disable-next-line no-undef
-                                require("../assets/img/faces/ayo-ogunseinde-2.jpg")
+                                require("../../assets/img/faces/ayo-ogunseinde-2.jpg")
                                   .default
                               }
                             />
@@ -540,7 +540,7 @@ function Dashboard() {
                               className="img-raised"
                               src={
                                 // eslint-disable-next-line no-undef
-                                require("../assets/img/faces/erik-lucatero-2.jpg")
+                                require("../../assets/img/faces/erik-lucatero-2.jpg")
                                   .default
                               }
                             />
@@ -599,7 +599,7 @@ function Dashboard() {
                               className="img-raised"
                               src={
                                 // eslint-disable-next-line no-undef
-                                require("../assets/img/faces/kaci-baum-2.jpg")
+                                require("../../assets/img/faces/kaci-baum-2.jpg")
                                   .default
                               }
                             />
@@ -658,7 +658,7 @@ function Dashboard() {
                               className="img-raised"
                               src={
                                 // eslint-disable-next-line no-undef
-                                require("../assets/img/faces/joe-gardner-2.jpg")
+                                require("../../assets/img/faces/joe-gardner-2.jpg")
                                   .default
                               }
                             />
