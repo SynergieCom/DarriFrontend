@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Loader from '../../components/front/Loader';
 import Sidebar from "../../components/front/Sidebar";
 import Aboutus from '../../ArchitekComponentAndPages/Aboutus/Aboutus-one';
@@ -13,6 +13,7 @@ import ScrollTop from '../../components/front/ScrollTop';
 import BannerHome from "../../components/front/Home/BannerHome";
 import Whychoose from "../../ArchitekComponentAndPages/Home/Construction/Whychoose";
 import NavBarHome from "../../components/front/Home/NavBarHome";
+import {BrowserRouter,useParams} from "react-router-dom";
 
 const Home = () => {
     const username = localStorage.getItem("username");

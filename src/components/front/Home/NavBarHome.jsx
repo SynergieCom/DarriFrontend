@@ -1,10 +1,20 @@
 import React from 'react';
+import {useHistory} from "react-router-dom";
+import {Button} from "reactstrap";
 
 
 const NavBarHome = () => {
+    const username = localStorage.getItem("username");
+    const history = useHistory();
 
     const click = (e) => {
         return e.preventDefault()
+    }
+
+    const Logout = () => {
+        localStorage.clear();
+        history.push('/');
+        history.go(0);
     }
 
     return (
@@ -150,15 +160,32 @@ const NavBarHome = () => {
                                                             <li><a href="/Getintouch">Get In Touch</a></li>
                                                         </ul>
                                                     </li>
+                                                    {username != null && (
+                                                        <li>
+                                                            <a href="/#">Profile</a><i className="ion-chevron-down"></i>
+                                                            <ul className="sub-menu">
+                                                                <li><a href="/Contactus">My Profile</a></li>
+                                                                <li>
+                                                                    <center><Button onClick={Logout}>Logout</Button>
+                                                                    </center>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    )}
+
                                                 </ul>
                                             </div>
                                         </div>
 
-                                        <div className="pt-header-info-box">
-                                            <div className="pt-menu-search-block">
-                                                <a href="/Login">Login</a>
+
+                                        {username === null && (
+                                            <div className="pt-header-info-box">
+                                                <div className="pt-menu-search-block">
+                                                    <a href="/Login">Login</a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
+
 
                                         <div className="pt-header-info-box">
                                             <div className="pt-menu-search-block">
