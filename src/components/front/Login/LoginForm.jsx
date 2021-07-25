@@ -10,11 +10,6 @@ const LoginForm = () => {
     const [error, setError] = useState({visible: false, message: "", subscription: false, id: "", severity: ""});
     const [reload, setReload] = useState(true);
 
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
-
-
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -212,7 +207,8 @@ const LoginForm = () => {
                                             </FormGroup>
                                             <br/> <br/>
                                             <FormGroup>
-                                                <a href="/login" style={{color: "darkblue"}}>Forgot Password ?</a>
+                                                <a href="/ResetPassword" style={{color: "darkblue"}}>Forgot Password
+                                                    ?</a>
                                             </FormGroup>
                                         </FormGroup>
 

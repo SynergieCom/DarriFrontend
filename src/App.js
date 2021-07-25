@@ -11,7 +11,9 @@ import AuthLayout from "./DashboardComponentsAndPages/layouts/Auth.js";
 import AdminLayout from "./DashboardComponentsAndPages/layouts/Admin.js";
 import Home from "./pages/front/Home";
 import Login from "./pages/front/Login";
-import Loader from "./components/front/Loader";
+import NotFound from "./pages/front/404NotFound";
+import ResetPassword from "./pages/front/ResetPassword";
+import NewPassword from "./pages/front/NewPassword";
 
 function App() {
     const user = true;
@@ -22,12 +24,13 @@ function App() {
         <>
             <Router basename="/">
                 {user ? (
-                    <>
-                        <Switch>
-                            <Route path="/" exact={true} component={Home}/>
-                            <Route path="/Login" component={Login}/>
-                        </Switch>
-                    </>
+                    <Switch>
+                        <Route path="/" exact={true} component={Home}/>
+                        <Route path="/Login" component={Login}/>
+                        <Route path="/ResetPassword" component={ResetPassword}/>
+                        <Route path="/ResetNewPassword" component={NewPassword}/>
+                        <Route component={NotFound}/>
+                    </Switch>
                 ) : (
                     <Switch>
                         <Redirect exact from="/" to="/admin/dashboard"/>
