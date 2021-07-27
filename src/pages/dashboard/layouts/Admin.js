@@ -19,19 +19,19 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch, useLocation } from "react-router-dom";
 
-import AdminNavbar from "../components/Navbars/AdminNavbar.js";
-import Footer from "../components/Footer/Footer.js";
-import Sidebar from "../components/Sidebar/Sidebar.js";
-import FixedPlugin from "../components/FixedPlugin/FixedPlugin.js";
+import AdminNavbar from "../../../components/dashboard/Navbars/AdminNavbar.js";
+import Footer from "../../../components/dashboard/Footer/Footer.js";
+import Sidebar from "../../../components/dashboard/Sidebar/Sidebar.js";
+import FixedPlugin from "../../../components/dashboard/FixedPlugin/FixedPlugin.js";
 
-import routes from "../../routes.js";
+import routes from "../../../routes.js";
 
 var ps;
 
 function Admin(props) {
   const location = useLocation();
   const [backgroundColor, setBackgroundColor] = React.useState("black");
-  const [activeColor, setActiveColor] = React.useState("info");
+  const [activeColor, setActiveColor] = React.useState("danger");
   const [sidebarMini, setSidebarMini] = React.useState(false);
   const mainPanel = React.useRef();
   React.useEffect(() => {

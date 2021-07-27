@@ -28,7 +28,7 @@ import {
 } from "reactstrap";
 
 // core components
-import ReactTable from "../../components/ReactTable/ReactTable.js";
+import ReactTable from "../../../components/dashboard/ReactTable/ReactTable.js";
 
 const dataTable = [
   ["Tiger Nixon", "System Architect", "Edinburgh", "61"],

@@ -32,6 +32,7 @@ function Sidebar(props) {
     const [collapseStates, setCollapseStates] = React.useState({});
     const sidebar = React.useRef();
     const username = localStorage.getItem("username");
+    const img = localStorage.getItem("img");
 
     //Specific Functions
 
@@ -185,7 +186,7 @@ function Sidebar(props) {
             <div className="sidebar-wrapper" ref={sidebar}>
                 <div className="user">
                     <div className="photo">
-                        <img src={avatar} alt="Avatar"/>
+                        <img src={process.env.REACT_APP_API_URL_UPLOADS +"/"+ img } alt="Avatar"/>
                     </div>
                     <div className="info">
                         <a

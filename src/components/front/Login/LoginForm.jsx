@@ -114,7 +114,6 @@ const LoginForm = () => {
                     history.push("/");
                     history.go(0);
 
-
                 }
             }
 

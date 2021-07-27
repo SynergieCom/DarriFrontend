@@ -19,10 +19,10 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch } from "react-router-dom";
 
-import AuthNavbar from "../components/Navbars/AuthNavbar.js";
-import Footer from "../components/Footer/Footer.js";
+import AuthNavbar from "../../../components/dashboard/Navbars/AuthNavbar.js";
+import Footer from "../../../components/dashboard/Footer/Footer.js";
 
-import routes from "../../routes.js";
+import routes from "../../../routes.js";
 
 var ps;
 

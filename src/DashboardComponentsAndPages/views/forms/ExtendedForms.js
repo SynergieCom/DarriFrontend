@@ -43,7 +43,7 @@ import {
 } from "reactstrap";
 
 // core components
-import ImageUpload from "../../components/CustomUpload/ImageUpload.js";
+import ImageUpload from "../../../components/dashboard/CustomUpload/ImageUpload.js";
 
 function ExtendedForms() {
   const slider1 = React.useRef();

@@ -27,7 +27,7 @@ import {
 } from "reactstrap";
 
 // core components
-import PictureUpload from "../../../components/CustomUpload/PictureUpload.js";
+import PictureUpload from "../../../../components/dashboard/CustomUpload/PictureUpload.js";
 
 const Step1 = React.forwardRef((props, ref) => {
   const [firstname, setfirstname] = React.useState("");
