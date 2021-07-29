@@ -1,14 +1,17 @@
 import React from 'react';
 import {Button, Card, CardBody, CardHeader, CardTitle, Col, Table, UncontrolledTooltip} from "reactstrap";
 import {queryServerApi} from "../../../utils/queryServerApi";
+import {useHistory} from "react-router";
 
 function UsersTable(props) {
     const role = localStorage.getItem('role');
+    const history = useHistory();
     const DisableAccount = async (id) => {
         const [err] = await queryServerApi("users/remove/" + id, {}, "DELETE");
         if (err) {
             console.log(err);
         }
+        history.push("/admin/users");
         history.go(0);
     };
 
