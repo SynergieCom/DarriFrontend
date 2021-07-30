@@ -37,7 +37,7 @@ const LoginForm = () => {
                 if (user[0].Role === "Admin" || user[0].Role === "Editor") {
                     localStorage.setItem('username', user[0].Username);
                     localStorage.setItem('role', user[0].Role);
-                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('id', user[0]._id);
                     localStorage.setItem('email', user[0].Email);
                     localStorage.setItem('img', user[0].img);
                     history.push("/admin/dashboard");

@@ -52,7 +52,6 @@ function Users() {
             <div className="content">
                 <Row>
                     <UsersTable Users={users}/>
-
                 </Row>
 
             </div>

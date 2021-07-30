@@ -1,6 +1,7 @@
 import Dashboard from "./DashboardComponentsAndPages/views/Dashboard.js";
 import Users from "./pages/dashboard/Users";
 import AddUser from "./pages/dashboard/AddUser";
+import UserProfile from "./pages/dashboard/UserProfile";
 
 
 const routes = [
@@ -10,7 +11,8 @@ const routes = [
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin",
-  },  {
+  },
+  {
     collapse: true,
     name: "Users Management",
     icon: "nc-icon nc-badge",
@@ -34,7 +36,12 @@ const routes = [
         path: "/User/:id",
         component: Users,
         layout: "/admin",
-      }
+      },
+      {
+        path: "/userProfile",
+        component: UserProfile,
+        layout: "/admin",
+      },
     ],
   },
 ];

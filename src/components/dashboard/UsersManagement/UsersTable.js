@@ -54,30 +54,24 @@ function UsersTable(props) {
                                     <td className="text-center">{new Date(user.ActiveDate).toDateString()}</td>
                                     <td className="text-right">{user.Email}</td>
                                     <td className="text-right">
-                                        {(user.Role === "Admin" || user.Role === "Editor") && (
-                                            <>
-                                                <Button
-                                                    className="btn-icon"
-                                                    color="info"
-                                                    id="tooltip264453216"
-                                                    size="sm"
-                                                    type="button"
-                                                >
-                                                    <i className="fa fa-user"/>
-                                                </Button>{" "}
-                                                <UncontrolledTooltip
-                                                    delay={0}
-                                                    target="tooltip264453216"
-                                                >
-                                                    Show User Details
-                                                </UncontrolledTooltip>
-                                            </>
-
-                                        )}
-
 
                                         {(role === "Admin" && (user.Role === "Admin" || user.Role === "Editor")) ? (
                                             <>
+                                                    <Button
+                                                        className="btn-icon"
+                                                        color="info"
+                                                        id="tooltip264453216"
+                                                        size="sm"
+                                                        type="button"
+                                                    >
+                                                        <i className="fa fa-user"/>
+                                                    </Button>{" "}
+                                                    <UncontrolledTooltip
+                                                        delay={0}
+                                                        target="tooltip264453216"
+                                                    >
+                                                        Show User Details
+                                                    </UncontrolledTooltip>
                                                 <Button
                                                     className="btn-icon"
                                                     color="success"
@@ -112,24 +106,59 @@ function UsersTable(props) {
                                                 </UncontrolledTooltip>
                                             </>
 
-                                        ) : (
+                                        ) : (role === "Editor" && (user.Role === "Admin" || user.Role === "Editor")) ? (
                                             <>
                                                 <Button
                                                     className="btn-icon"
-                                                    color="danger"
-                                                    id="tooltip476609793"
+                                                    color="info"
+                                                    id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => DisableAccount(user._id)}
                                                 >
-                                                    <i className="fa fa-times"/>
+                                                    <i className="fa fa-user"/>
                                                 </Button>{" "}
                                                 <UncontrolledTooltip
                                                     delay={0}
-                                                    target="tooltip476609793"
+                                                    target="tooltip264453216"
                                                 >
-                                                    Disable Account
+                                                    Show User Details
                                                 </UncontrolledTooltip>
+
+                                                <Button
+                                                    className="btn-icon"
+                                                    color="success"
+                                                    id="tooltip366246651"
+                                                    size="sm"
+                                                    type="button"
+                                                >
+                                                    <i className="fa fa-edit"/>
+                                                </Button>{" "}
+                                                <UncontrolledTooltip
+                                                    delay={0}
+                                                    target="tooltip366246651"
+                                                >
+                                                    Edit
+                                                </UncontrolledTooltip>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <>
+                                                    <Button
+                                                        className="btn-icon"
+                                                        color="info"
+                                                        id="tooltip264453216"
+                                                        size="sm"
+                                                        type="button"
+                                                    >
+                                                        <i className="fa fa-user"/>
+                                                    </Button>{" "}
+                                                    <UncontrolledTooltip
+                                                        delay={0}
+                                                        target="tooltip264453216"
+                                                    >
+                                                        Show User Details
+                                                    </UncontrolledTooltip>
+                                                </>
                                             </>
                                         )}
                                     </td>

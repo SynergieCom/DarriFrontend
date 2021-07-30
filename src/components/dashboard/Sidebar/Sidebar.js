@@ -20,7 +20,6 @@ import {Nav, Collapse} from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import avatar from "../../../assets/img/faces/ayo-ogunseinde-2.jpg";
 import logo from "../../../assets/img/react-logo.png";
 import {useHistory} from "react-router";
 
@@ -41,6 +40,8 @@ function Sidebar(props) {
         history.push('/');
         history.go(0);
     }
+
+
 
     // this creates the intial state of this component based on the collapse routes
     // that it gets through props.routes
@@ -203,19 +204,13 @@ function Sidebar(props) {
                         <Collapse isOpen={openAvatar}>
                             <ul className="nav">
                                 <li>
-                                    <NavLink to="/admin/user-profile" activeClassName="">
+                                    <NavLink to="/admin/userProfile" activeClassName="">
                                         <span className="sidebar-mini-icon">MP</span>
                                         <span className="sidebar-normal">My Profile</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/admin/user-profile" activeClassName="">
-                                        <span className="sidebar-mini-icon">EP</span>
-                                        <span className="sidebar-normal">Edit Profile</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/admin/user-profile" activeClassName="">
+                                    <NavLink to="/admin/userProfile" activeClassName="">
                                         <span className="sidebar-mini-icon">S</span>
                                         <span className="sidebar-normal">Settings</span>
                                     </NavLink>

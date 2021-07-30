@@ -16,13 +16,10 @@ import * as Yup from "yup";
 import {useFormik} from "formik";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import defaultAvatar from "../../../assets/img/placeholder.jpg";
-import defaultImage from "../../../assets/img/image_placeholder.jpg";
 import {useHistory} from "react-router";
-import NotificationAlert from "react-notification-alert";
 
 function AddUserForm() {
     const history = useHistory();
-    const [success, setSuccess] = useState(false);
     const [error, setError] = useState({
         visible: false,
         message: "",
