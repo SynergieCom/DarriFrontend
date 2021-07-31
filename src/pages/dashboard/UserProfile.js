@@ -11,7 +11,7 @@ import {
     Col,
 } from "reactstrap";
 import UserInformations from "../../components/dashboard/UserProfile/UserInformations";
-import EditProfileAdmin from "../../components/dashboard/UserProfile/EditProfileAdmin";
+import EditProfileUser from "../../components/dashboard/UserProfile/EditProfileUser";
 import {useServerApi} from "../../hooks/useServerApi";
 
 function UserProfile() {
@@ -30,7 +30,7 @@ function UserProfile() {
             <div className="content">
                 <Row>
                     <UserInformations user={toRender}/>
-                    <EditProfileAdmin/>
+                    <EditProfileUser/>
                 </Row>
             </div>
         </>

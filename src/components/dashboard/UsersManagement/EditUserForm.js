@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
-import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, FormGroup, Input, Row} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import {useFormik} from "formik";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import * as Yup from "yup";
 import {useHistory} from "react-router";
 
-function EditProfileAdmin(props) {
+function EditUserForm(props) {
     const history = useHistory();
     const [fileState, setFileState] = React.useState(null);
-    const [imagePreviewUrl, setImagePreviewUrl] = React.useState(process.env.REACT_APP_API_URL_UPLOADS + "/" + localStorage.getItem('img'));
+    const [imagePreviewUrl, setImagePreviewUrl] = React.useState("");
     const fileInput = React.useRef();
     const handleImageChange = (e) => {
         e.preventDefault();
@@ -37,7 +37,7 @@ function EditProfileAdmin(props) {
     const handleRemove = () => {
         fileInput.current.value = null;
         setFileState(null);
-        setImagePreviewUrl(process.env.REACT_APP_API_URL_UPLOADS + "/" + localStorage.getItem('img'));
+        setImagePreviewUrl(imagePreviewUrl);
     };
 
 
@@ -55,25 +55,24 @@ function EditProfileAdmin(props) {
             "City": " ",
             "State": "",
             "ZipCode": "",
+            "Role": ""
         }, validationSchema: YupSchema,
         onSubmit: async (values) => {
             console.log("Values", values);
-            const [res,err] = await queryServerApi("users/update/"+localStorage.getItem('id'), values, "PUT", true);
+            const [res, err] = await queryServerApi("users/update/" + props.id, values, "PUT", true);
             console.log(err);
             if (err) {
                 console.log('error', err);
             } else {
-                localStorage.setItem('img',res.img);
                 history.push("/admin/users");
             }
         }
     });
 
 
-
     useEffect(() => {
         async function fetchDataForm() {
-            const [res, err] = await queryServerApi("users/" + localStorage.getItem('id'));
+            const [res, err] = await queryServerApi("users/" + props.id);
             formik.setValues({
                 "Id": res?._id,
                 "Username": res.Username,
@@ -86,7 +85,9 @@ function EditProfileAdmin(props) {
                 "City": res.Address.City,
                 "State": res.Address.State,
                 "ZipCode": res.Address.ZipCode,
+                "Role": res.Role
             })
+            setImagePreviewUrl(process.env.REACT_APP_API_URL_UPLOADS + "/" + res.img)
         }
 
         fetchDataForm().then(r => console.log("-> ", "DONE"));
@@ -99,7 +100,7 @@ function EditProfileAdmin(props) {
 
                     <Card>
                         <CardHeader>
-                            <h5 className="title">Edit Profile</h5>
+                            <h5 className="title">Edit User</h5>
                         </CardHeader>
 
                         <div className="fileinput text-center">
@@ -145,7 +146,6 @@ function EditProfileAdmin(props) {
                                             <Input
                                                 value={formik.values.Id}
                                                 disabled
-                                                placeholder="Company"
                                                 type="number"
                                             />
                                         </FormGroup>
@@ -312,6 +312,76 @@ function EditProfileAdmin(props) {
                                         </FormGroup>
                                     </Col>
                                 </Row>
+
+
+                                {localStorage.getItem('Role') ==="Admin" && (
+                                    <Row>
+                                        <Label sm="2">User Role</Label>
+                                        <Col className="checkbox-radios" sm="10">
+                                            <div className="form-check-radio">
+                                                <Label check>
+                                                    {formik.values.Role === "Admin" ? (
+                                                        <>
+                                                            <Input
+                                                                defaultChecked
+                                                                value="Admin"
+                                                                id="exampleRadios11"
+                                                                name="Role"
+                                                                type="radio"
+                                                                onChange={() => formik.setFieldValue("Role", "Admin")}
+                                                            />
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Input
+                                                                value="Admin"
+                                                                id="exampleRadios11"
+                                                                name="Role"
+                                                                type="radio"
+                                                                onChange={() => formik.setFieldValue("Role", "Admin")}
+                                                            />
+                                                        </>
+                                                    )
+                                                    }
+
+                                                    Admin <span className="form-check-sign"/>
+                                                </Label>
+                                            </div>
+                                            <div className="form-check-radio">
+                                                <Label check>
+                                                    {formik.values.Role === "Editor" ? (
+                                                        <>
+                                                            <Input
+                                                                defaultChecked
+                                                                value="Editor"
+                                                                id="exampleRadios12"
+                                                                name="Role"
+                                                                type="radio"
+                                                                onChange={() => formik.setFieldValue("Role", "Editor")}
+                                                            />
+                                                        </>
+
+                                                    ) : (
+                                                        <>
+                                                            <Input
+                                                                value="Editor"
+                                                                id="exampleRadios12"
+                                                                name="Role"
+                                                                type="radio"
+                                                                onChange={() => formik.setFieldValue("Role", "Editor")}
+                                                            />
+                                                        </>
+                                                    )
+                                                    }
+
+                                                    Editor <span className="form-check-sign"/>
+                                                </Label>
+                                            </div>
+                                        </Col>
+                                    </Row>
+
+                                )}
+
                             </Form>
                         </CardBody>
                         <CardFooter className="text-center">
@@ -347,4 +417,4 @@ const YupSchema = Yup.object({
     ZipCode: Yup.number("Zip Code should be a number")
         .positive("Zip Code should be Positive"),
 });
-export default EditProfileAdmin;
+export default EditUserForm;
