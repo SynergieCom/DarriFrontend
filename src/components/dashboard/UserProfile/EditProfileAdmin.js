@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
-import {Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Row} from "reactstrap";
-import defaultAvatar from "../../../assets/img/placeholder.jpg";
+import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, FormGroup, Input, Row} from "reactstrap";
 import {useFormik} from "formik";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import * as Yup from "yup";
+import {useHistory} from "react-router";
 
 function EditProfileAdmin(props) {
+    const history = useHistory();
     const [fileState, setFileState] = React.useState(null);
-    const [imagePreviewUrl, setImagePreviewUrl] = React.useState(defaultAvatar);
+    const [imagePreviewUrl, setImagePreviewUrl] = React.useState(process.env.REACT_APP_API_URL_UPLOADS + "/" + localStorage.getItem('img'));
     const fileInput = React.useRef();
     const handleImageChange = (e) => {
         e.preventDefault();
@@ -36,7 +37,7 @@ function EditProfileAdmin(props) {
     const handleRemove = () => {
         fileInput.current.value = null;
         setFileState(null);
-        setImagePreviewUrl(defaultAvatar);
+        setImagePreviewUrl(process.env.REACT_APP_API_URL_UPLOADS + "/" + localStorage.getItem('img'));
     };
 
 
@@ -57,16 +58,17 @@ function EditProfileAdmin(props) {
         }, validationSchema: YupSchema,
         onSubmit: async (values) => {
             console.log("Values", values);
-            const [res, err] = await queryServerApi("users", values, "POST", true);
+            const [res,err] = await queryServerApi("users/update/"+localStorage.getItem('id'), values, "PUT", true);
             console.log(err);
-            console.log('res = ', res);
             if (err) {
                 console.log('error', err);
             } else {
-                history.push(`/admin/users?username=${formik.values.Username}`);
+                localStorage.setItem('img',res.img);
+                history.push("/admin/users");
             }
         }
     });
+
 
 
     useEffect(() => {
@@ -80,144 +82,245 @@ function EditProfileAdmin(props) {
                 "LastName": res.LastName,
                 "Email": res.Email,
                 "PhoneNumber": res.PhoneNumber,
-                "Street": res.Street,
-                "City": res.City,
-                "State": res.State,
-                "ZipCode": res.ZipCode,
+                "Street": res.Address.Street,
+                "City": res.Address.City,
+                "State": res.Address.State,
+                "ZipCode": res.Address.ZipCode,
             })
         }
-        fetchDataForm().then(r => console.log("-> ","DONE"));
+
+        fetchDataForm().then(r => console.log("-> ", "DONE"));
     }, []);
 
     return (
         <>
             <Col md="8">
-                <Card>
-                    <CardHeader>
-                        <h5 className="title">Edit Profile</h5>
-                    </CardHeader>
-                    <CardBody>
-                        <Form>
-                            <Row>
-                                <Col className="pr-1" md="5">
-                                    <FormGroup>
-                                        <label>Id</label>
-                                        <Input
-                                            value={formik.values.Id}
-                                            disabled
-                                            placeholder="Company"
-                                            type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="px-1" md="3">
-                                    <FormGroup>
-                                        <label>Username</label>
-                                        <Input
-                                            name="Username"
-                                            value={formik.values.Username}
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="pl-1" md="4">
-                                    <FormGroup>
-                                        <label htmlFor="exampleInputEmail1">
-                                            Email address
-                                        </label>
-                                        <Input
-                                            name="Email"
-                                            placeholder="Email"
-                                            type="email"
-                                            value={formik.values.Email}
-                                            onChange={formik.handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className="pr-1" md="6">
-                                    <FormGroup>
-                                        <label>First Name</label>
-                                        <Input
-                                            name="FirstName"
-                                            value={formik.values.FirstName}
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="pl-1" md="6">
-                                    <FormGroup>
-                                        <label>Last Name</label>
-                                        <Input
-                                            name="LastName"
-                                            value={formik.values.LastName}
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md="12">
-                                    <FormGroup>
-                                        <label>Address</label>
-                                        <Input
-                                            defaultValue="Melbourne, Australia"
-                                            placeholder="Home Address"
-                                            type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className="pr-1" md="4">
-                                    <FormGroup>
-                                        <label>City</label>
-                                        <Input
-                                            defaultValue="Melbourne"
-                                            placeholder="City"
-                                            type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="px-1" md="4">
-                                    <FormGroup>
-                                        <label>Country</label>
-                                        <Input
-                                            defaultValue="Australia"
-                                            placeholder="Country"
-                                            type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="pl-1" md="4">
-                                    <FormGroup>
-                                        <label>Postal Code</label>
-                                        <Input placeholder="ZIP Code" type="number"/>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md="12">
-                                    <FormGroup>
-                                        <label>About Me</label>
-                                        <Input
-                                            className="textarea"
-                                            type="textarea"
-                                            cols="80"
-                                            rows="4"
-                                            defaultValue="Oh so, your weak rhyme You doubt I'll bother,
-                          reading into it"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                        </Form>
-                    </CardBody>
-                </Card>
+                <Form onSubmit={formik.handleSubmit} className="form-horizontal" method="get">
+
+                    <Card>
+                        <CardHeader>
+                            <h5 className="title">Edit Profile</h5>
+                        </CardHeader>
+
+                        <div className="fileinput text-center">
+                            <input type="file" onChange={handleImageChange} ref={fileInput}/>
+                            <div className={"thumbnail img-circle"}>
+                                <img src={imagePreviewUrl} alt="..."/>
+                            </div>
+                            <div>
+                                {fileState === null ? (
+                                    <Button className="btn-round" type="file" onClick={(event) => {
+                                        handleClick();
+                                    }}>
+                                        Add Photo
+                                    </Button>
+                                ) : (
+                                    <span>
+                                         <Button className="btn-round" onClick={(event) => {
+                                             handleClick();
+                                         }}>
+                                               Change
+                                                         </Button>
+                                     <br/>
+                                            <Button
+                                                color="danger"
+                                                className="btn-round"
+                                                onClick={(event) => {
+                                                    handleRemove();
+                                                }}>
+                                                <i className="fa fa-times"/>
+                                                Remove
+                                            </Button>
+                                        </span>
+                                )}
+                            </div>
+                        </div>
+
+                        <CardBody>
+                            <Form>
+                                <Row>
+                                    <Col className="pr-1" md="4">
+                                        <FormGroup>
+                                            <label>Id</label>
+                                            <Input
+                                                value={formik.values.Id}
+                                                disabled
+                                                placeholder="Company"
+                                                type="number"
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="px-1" md="2">
+                                        <FormGroup
+                                            className={formik.errors.Cin && formik.touched.Cin ? "has-danger" : "has-success"}>
+                                            <label>Cin</label>
+                                            <Input
+                                                name="Cin"
+                                                value={formik.values.Cin}
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.Cin || formik.touched.Cin) &&
+                                            <label className="error">
+                                                {formik.errors.Cin}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="px-1" md="2">
+                                        <FormGroup
+                                            className={formik.errors.Username && formik.touched.Username ? "has-danger" : "has-success"}>
+                                            <label>Username</label>
+                                            <Input
+                                                name="Username"
+                                                value={formik.values.Username}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.Username || formik.touched.Username) &&
+                                            <label className="error">
+                                                {formik.errors.Username}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="pl-1" md="4">
+                                        <FormGroup
+                                            className={formik.errors.Email && formik.touched.Email ? "has-danger" : "has-success"}>
+                                            <label htmlFor="exampleInputEmail1">
+                                                Email address
+                                            </label>
+                                            <Input
+                                                name="Email"
+                                                placeholder="Email"
+                                                type="email"
+                                                value={formik.values.Email}
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.Email || formik.touched.Email) &&
+                                            <label className="error">
+                                                {formik.errors.Email}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col className="pr-1" md="6">
+                                        <FormGroup
+                                            className={formik.errors.FirstName && formik.touched.FirstName ? "has-danger" : "has-success"}>
+                                            <label>First Name</label>
+                                            <Input
+                                                name="FirstName"
+                                                value={formik.values.FirstName}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.FirstName || formik.touched.FirstName) &&
+                                            <label className="error">
+                                                {formik.errors.FirstName}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="pl-1" md="6">
+                                        <FormGroup
+                                            className={formik.errors.LastName && formik.touched.LastName ? "has-danger" : "has-success"}>
+                                            <label>Last Name</label>
+                                            <Input
+                                                name="LastName"
+                                                value={formik.values.LastName}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.LastName || formik.touched.LastName) &&
+                                            <label className="error">
+                                                {formik.errors.LastName}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <FormGroup
+                                            className={formik.errors.PhoneNumber && formik.touched.PhoneNumber ? "has-danger" : "has-success"}>
+                                            <label>Phone Number</label>
+                                            <Input
+                                                name="PhoneNumber"
+                                                value={formik.values.PhoneNumber}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.PhoneNumber || formik.touched.PhoneNumber) &&
+                                            <label className="error">
+                                                {formik.errors.PhoneNumber}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col className="pr-1" md="3">
+                                        <FormGroup>
+                                            <label>City</label>
+                                            <Input
+                                                name="City"
+                                                value={formik.values.City}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="pr-1" md="3">
+                                        <FormGroup>
+                                            <label>Street</label>
+                                            <Input
+                                                name="Street"
+                                                value={formik.values.Street}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="px-1" md="3">
+                                        <FormGroup>
+                                            <label>State</label>
+                                            <Input
+                                                name="State"
+                                                value={formik.values.State}
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col className="pl-1" md="3">
+                                        <FormGroup
+                                            className={formik.errors.ZipCode && formik.touched.ZipCode ? "has-danger" : "has-success"}>
+                                            <label>Zip Code</label>
+                                            <Input
+                                                name="ZipCode"
+                                                value={formik.values.ZipCode}
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                            />
+                                            {(formik.errors.ZipCode || formik.touched.ZipCode) &&
+                                            <label className="error">
+                                                {formik.errors.ZipCode}
+                                            </label>
+                                            }
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </CardBody>
+                        <CardFooter className="text-center">
+                            <Button color="primary">
+                                Edit
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </Form>
             </Col>
 
         </>
@@ -243,12 +346,5 @@ const YupSchema = Yup.object({
         .required("phone number is Required"),
     ZipCode: Yup.number("Zip Code should be a number")
         .positive("Zip Code should be Positive"),
-    Password: Yup.string()
-        .min(8 | " your password should be 8 characters at least")
-        .max(15 | " longer than 15 characters")
-        .required("password is Required"),
-    PasswordConfirmation: Yup.string()
-        .oneOf([Yup.ref('Password'), null], 'Passwords must match')
-        .required("You need to confirm your password"),
 });
 export default EditProfileAdmin;
