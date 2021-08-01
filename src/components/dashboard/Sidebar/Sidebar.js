@@ -210,7 +210,7 @@ function Sidebar(props) {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/admin/userProfile" activeClassName="">
+                                    <NavLink to="/admin/settings" activeClassName="">
                                         <span className="sidebar-mini-icon">S</span>
                                         <span className="sidebar-normal">Settings</span>
                                     </NavLink>

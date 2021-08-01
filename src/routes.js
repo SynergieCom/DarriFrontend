@@ -3,6 +3,7 @@ import Users from "./pages/dashboard/Users";
 import AddUser from "./pages/dashboard/AddUser";
 import UserProfile from "./pages/dashboard/UserProfile";
 import EditUser from "./pages/dashboard/EditUserPage";
+import Settings from "./pages/dashboard/Settings";
 
 
 const routes = [
@@ -47,7 +48,11 @@ const routes = [
         path: "/updateUser/:id",
         component: EditUser,
         layout: "/admin",
-
+      } ,
+      {
+        path: "/settings",
+        component: Settings,
+        layout: "/admin",
       }
     ],
   },

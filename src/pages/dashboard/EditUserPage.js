@@ -3,7 +3,7 @@ import {Row} from "reactstrap";
 import {useParams} from "react-router";
 import EditUserForm from "../../components/dashboard/UsersManagement/EditUserForm";
 
-function EditUser(props) {
+function EditUser() {
     const {id} = useParams();
     return (
         <>

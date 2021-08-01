@@ -20,7 +20,7 @@ import {useHistory} from "react-router";
 
 function AddUserForm() {
     const history = useHistory();
-    const role = localStorage.getItem('Role');
+    const role = localStorage.getItem('role');
     const [error, setError] = useState({
         visible: false,
         message: "",
@@ -92,12 +92,16 @@ function AddUserForm() {
             }
         }
     });
+    useEffect(() => {
+        console.log("-> ",role);
+    }, []);
+
 
 
     return (
         <>
             <Col md="12">
-                {role === "Admin " ? (
+                {role === "Admin" ? (
                     <>
                         <Form onSubmit={formik.handleSubmit} className="form-horizontal" method="get">
                             <Card>
