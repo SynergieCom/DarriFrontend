@@ -186,7 +186,7 @@ function UsersTable(props) {
                                                                 id="tooltip476609793"
                                                                 size="sm"
                                                                 type="button"
-                                                                onClick={() => toggleModalNotice(user._id)}
+                                                                onClick={() => DisableAccount(user._id)}
                                                             >
                                                                 <i className="fa fa-times"/>
                                                             </Button>{" "}

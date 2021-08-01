@@ -314,7 +314,7 @@ function EditUserForm(props) {
                                 </Row>
 
 
-                                {localStorage.getItem('Role') ==="Admin" && (
+                                {localStorage.getItem('role') ==="Admin" && (
                                     <Row>
                                         <Label sm="2">User Role</Label>
                                         <Col className="checkbox-radios" sm="10">

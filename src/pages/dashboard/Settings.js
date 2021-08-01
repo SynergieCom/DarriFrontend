@@ -11,7 +11,7 @@ function Settings() {
             <div className="content">
                 <Row>
                     <ChangesPassword id={id}/>
-                    <DisableUserAccount/>
+                    <DisableUserAccount id={id}/>
                 </Row>
             </div>
         </>);
