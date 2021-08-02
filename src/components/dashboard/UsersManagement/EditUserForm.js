@@ -64,6 +64,7 @@ function EditUserForm(props) {
             if (err) {
                 console.log('error', err);
             } else {
+                localStorage.setItem('role', formik.values.Role)
                 history.push("/admin/users");
             }
         }
@@ -314,7 +315,7 @@ function EditUserForm(props) {
                                 </Row>
 
 
-                                {localStorage.getItem('role') ==="Admin" && (
+                                {localStorage.getItem('role') === "Admin" && (
                                     <Row>
                                         <Label sm="2">User Role</Label>
                                         <Col className="checkbox-radios" sm="10">

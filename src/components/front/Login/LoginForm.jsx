@@ -4,11 +4,16 @@ import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import {useFormik} from "formik";
+import SignInWithFace from "./SignInWithFace";
 
 const LoginForm = () => {
     const history = useHistory();
     const [error, setError] = useState({visible: false, message: "", subscription: false, id: "", severity: ""});
-    const [reload, setReload] = useState(true);
+    const [loginWithFace, setLoginWithFace] = useState(false);
+
+    const LoginWithFaceRecognition = () => {
+        setLoginWithFace(!loginWithFace);
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -217,6 +222,13 @@ const LoginForm = () => {
 
                                     </Col>
                                         <Col md="1" sm="1" xs="3">
+
+                                            <Button className="btn-round btn-icon" color="danger"
+                                                    onClick={LoginWithFaceRecognition}>
+                                                <i className="fa fa-user"/>
+                                            </Button>
+                                        </Col>
+                                        <Col md="1" sm="1" xs="3">
                                             <Button className="btn-icon btn-round" color="facebook">
                                                 <i className="fa fa-facebook-f"/>
                                             </Button>
@@ -247,9 +259,20 @@ const LoginForm = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className="col-xl-6 d-lg-inline-block">
-                            <img src="/images/bg/WallpaperLogin.png" className="img-fluid" alt="architeck"/>
-                        </div>
+                        {loginWithFace ?(
+                            <>
+                                <div className="col-xl-6 d-lg-inline-block">
+                                    <SignInWithFace/>
+                                </div>
+                            </>
+                        ) :(
+                            <>
+                                <div className="col-xl-6 d-lg-inline-block">
+                                    <img src="/images/bg/WallpaperLogin.png" className="img-fluid" alt="architeck"/>
+                                </div>
+                            </>
+                        )}
+
                     </div>
                 </div>
             </section>
