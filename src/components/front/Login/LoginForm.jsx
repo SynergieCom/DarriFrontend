@@ -6,6 +6,8 @@ import {queryServerApi} from "../../../utils/queryServerApi";
 import {useFormik} from "formik";
 import SignInWithFace from "./SignInWithFace";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from 'react-facebook-login';
+
 
 const LoginForm = () => {
     const history = useHistory();
@@ -224,6 +226,104 @@ const LoginForm = () => {
 
     }
 
+    const responseFacebook = async (response) => {
+        console.log("-> response", response.accessToken);
+        const [user, err] = await queryServerApi("users/loginWithFacebook/" + response.accessToken + "?userID=" + response.userID, null, "GET", true);
+        if (user === "UserNotFound") {
+            setError({
+                visible: true,
+                message: `You need to sing Up with this Google Account First !`,
+                severity: 'info'
+
+            });
+        } else {
+            if (user[0].Role === "Admin" || user[0].Role === "Editor") {
+                localStorage.setItem('username', user[0].Username);
+                localStorage.setItem('role', user[0].Role);
+                localStorage.setItem('id', user[0]._id);
+                localStorage.setItem('email', user[0].Email);
+                localStorage.setItem('img', user[0].img);
+                history.push("/admin/dashboard");
+                history.go(0);
+            } else if (user[0].Role === "Promoter") {
+                const [promoter, err] = await queryServerApi("promoters/" + user[0].RefUser, null, "GET", false);
+                if (promoter.Subscribed) {
+                    localStorage.setItem('username', user[0].Username);
+                    localStorage.setItem('role', user[0].Role);
+                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('email', user[0].Email);
+                    localStorage.setItem('img', user[0].img);
+                    history.push('/');
+                    history.go(0);
+
+                } else {
+                    setError({
+                        visible: true,
+                        message: "You are not Subscribed Please Update your subscription",
+                        subscription: true,
+                        id: user[0].RefUser,
+                        severity: 'warning'
+                    });
+
+                }
+            } else if (user[0].Role === "Architect") {
+                const [architect, err] = await queryServerApi("architects/" + user[0].RefUser, null, "GET", false);
+                if (architect.Subscribed) {
+                    localStorage.setItem('username', user[0].Username);
+                    localStorage.setItem('role', user[0].Role);
+                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('email', user[0].Email);
+                    localStorage.setItem('img', user[0].img);
+                    history.push('/');
+                    history.go(0);
+
+                } else {
+                    setError({
+                        visible: true,
+                        message: "You are not Subscribed Please Update your subscription",
+                        subscription: true,
+                        id: user[0].RefUser,
+                        severity: 'warning'
+                    });
+
+                }
+            } else if (user[0].Role === "Engineer") {
+                const [engineer, err] = await queryServerApi("engineers/" + user[0].RefUser, null, "GET", false);
+                if (engineer.Subscribed) {
+                    localStorage.setItem('username', user[0].Username);
+                    localStorage.setItem('role', user[0].Role);
+                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('email', user[0].Email);
+                    localStorage.setItem('img', user[0].img);
+                    history.push('/');
+                    history.go(0);
+
+                } else {
+                    setError({
+                        visible: true,
+                        message: "You are not Subscribed Please Update your subscription",
+                        subscription: true,
+                        id: user[0].RefUser,
+                        severity: 'warning'
+                    });
+
+                }
+            } else {
+                localStorage.setItem('username', user[0].Username);
+                localStorage.setItem('role', user[0].Role);
+                localStorage.setItem('id', user[0].RefUser);
+                localStorage.setItem('email', user[0].Email);
+                localStorage.setItem('img', user[0].img);
+                history.push("/");
+                history.go(0);
+
+            }
+        }
+
+
+    }
+
+
     const responseErrorGoogle = (response) => {
         /*    setError({
                 visible: true,
@@ -336,20 +436,34 @@ const LoginForm = () => {
                                         </Col>
                                         <Col md="1" sm="1" xs="3">
                                             <Button className="btn-icon btn-round" color="facebook">
-                                                <i className="fa fa-facebook-f"/>
+                                                <FacebookLogin
+                                                    size="Small"
+                                                    appId="430902411432071"
+                                                    autoLoad={false}
+                                                    fields="name,email,picture"
+                                                    cssClass="btnFacebook"
+                                                    icon="fa fa-facebook-f"
+                                                    textButton=""
+                                                    callback={responseFacebook}
+                                                />
                                             </Button>
                                         </Col>
                                         <Col md="1" sm="1" xs="3">
-                                            <Button className="btn-icon btn-round">
-                                                <GoogleLogin
-                                                    clientId="211469900619-2p5n681boi9123tb9tqohej9b5186mr6.apps.googleusercontent.com"
-                                                    buttonText="Google"
-                                                    className="google"
-                                                    onSuccess={responseGoogle}
-                                                    onFailure={responseErrorGoogle}
-                                                    cookiePolicy={'single_host_origin'}
-                                                />
-                                            </Button>
+                                            <GoogleLogin
+                                                clientId="211469900619-2p5n681boi9123tb9tqohej9b5186mr6.apps.googleusercontent.com"
+                                                render={renderProps => (
+                                                    <Button
+                                                        className="btn-icon btn-round"
+                                                        color="google"
+                                                        onClick={renderProps.onClick}
+                                                        disabled={renderProps.disabled}
+                                                    >
+                                                        <i className="fa fa-google"/>
+                                                    </Button>
+                                                )}
+                                                onSuccess={responseGoogle}
+                                                onFailure={responseErrorGoogle}
+                                            />
                                         </Col>
                                         <Col md="1" sm="1" xs="3">
                                             <Button className="btn-icon btn-round" color="linkedin">

@@ -10,3 +10,20 @@
 .position-absolute {
     position: absolute;
 }
+
+.btnFacebook {
+    width: 120px;
+    height:52px;
+    border-radius: 4px;
+    background: #3b5998;
+    color:white;
+    border:0px transparent;
+    text-align: center;
+    margin:5px;
+    display: inline-block;
+}
+
+.btnFacebook:hover {
+    background: #3b5998;
+    opacity: 0.6;
+}
