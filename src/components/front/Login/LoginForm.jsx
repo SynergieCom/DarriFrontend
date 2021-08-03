@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import {useFormik} from "formik";
 import SignInWithFace from "./SignInWithFace";
+import GoogleLogin from "react-google-login";
 
 const LoginForm = () => {
     const history = useHistory();
@@ -127,6 +128,111 @@ const LoginForm = () => {
     });
 
 
+    const responseGoogle = async (response) => {
+        console.log(response);
+        const [user, err] = await queryServerApi("users/loginWithGoogle/" + response.tokenId, null, "GET", false);
+        if (user === "UserNotFound") {
+            setError({
+                visible: true,
+                message: `You need to sing Up with this Google Account First !`,
+                severity: 'info'
+
+            });
+        } else {
+            if (user[0].Role === "Admin" || user[0].Role === "Editor") {
+                localStorage.setItem('username', user[0].Username);
+                localStorage.setItem('role', user[0].Role);
+                localStorage.setItem('id', user[0]._id);
+                localStorage.setItem('email', user[0].Email);
+                localStorage.setItem('img', user[0].img);
+                history.push("/admin/dashboard");
+                history.go(0);
+            } else if (user[0].Role === "Promoter") {
+                const [promoter, err] = await queryServerApi("promoters/" + user[0].RefUser, null, "GET", false);
+                if (promoter.Subscribed) {
+                    localStorage.setItem('username', user[0].Username);
+                    localStorage.setItem('role', user[0].Role);
+                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('email', user[0].Email);
+                    localStorage.setItem('img', user[0].img);
+                    history.push('/');
+                    history.go(0);
+
+                } else {
+                    setError({
+                        visible: true,
+                        message: "You are not Subscribed Please Update your subscription",
+                        subscription: true,
+                        id: user[0].RefUser,
+                        severity: 'warning'
+                    });
+
+                }
+            } else if (user[0].Role === "Architect") {
+                const [architect, err] = await queryServerApi("architects/" + user[0].RefUser, null, "GET", false);
+                if (architect.Subscribed) {
+                    localStorage.setItem('username', user[0].Username);
+                    localStorage.setItem('role', user[0].Role);
+                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('email', user[0].Email);
+                    localStorage.setItem('img', user[0].img);
+                    history.push('/');
+                    history.go(0);
+
+                } else {
+                    setError({
+                        visible: true,
+                        message: "You are not Subscribed Please Update your subscription",
+                        subscription: true,
+                        id: user[0].RefUser,
+                        severity: 'warning'
+                    });
+
+                }
+            } else if (user[0].Role === "Engineer") {
+                const [engineer, err] = await queryServerApi("engineers/" + user[0].RefUser, null, "GET", false);
+                if (engineer.Subscribed) {
+                    localStorage.setItem('username', user[0].Username);
+                    localStorage.setItem('role', user[0].Role);
+                    localStorage.setItem('id', user[0].RefUser);
+                    localStorage.setItem('email', user[0].Email);
+                    localStorage.setItem('img', user[0].img);
+                    history.push('/');
+                    history.go(0);
+
+                } else {
+                    setError({
+                        visible: true,
+                        message: "You are not Subscribed Please Update your subscription",
+                        subscription: true,
+                        id: user[0].RefUser,
+                        severity: 'warning'
+                    });
+
+                }
+            } else {
+                localStorage.setItem('username', user[0].Username);
+                localStorage.setItem('role', user[0].Role);
+                localStorage.setItem('id', user[0].RefUser);
+                localStorage.setItem('email', user[0].Email);
+                localStorage.setItem('img', user[0].img);
+                history.push("/");
+                history.go(0);
+
+            }
+        }
+
+    }
+
+    const responseErrorGoogle = (response) => {
+        /*    setError({
+                visible: true,
+                message: "Something wrong",
+                severity: "error"
+            });*/
+    }
+
+
     // Functions
     const UpgradeSubscription = () => {
         history.push("/Pricing/" + error.id);
@@ -151,7 +257,7 @@ const LoginForm = () => {
 
                                 {error.visible && (
                                     <UncontrolledAlert color={error.severity} fade={false}>
-                                        <span><b>Danger ! </b>{error.message}</span>
+                                        <span><b>{error.severity} ! </b>{error.message}</span>
                                     </UncontrolledAlert>
                                 )}
 
@@ -234,8 +340,15 @@ const LoginForm = () => {
                                             </Button>
                                         </Col>
                                         <Col md="1" sm="1" xs="3">
-                                            <Button className="btn-icon btn-round" color="google">
-                                                <i className="fa fa-google-plus"/>
+                                            <Button className="btn-icon btn-round">
+                                                <GoogleLogin
+                                                    clientId="211469900619-2p5n681boi9123tb9tqohej9b5186mr6.apps.googleusercontent.com"
+                                                    buttonText="Google"
+                                                    className="google"
+                                                    onSuccess={responseGoogle}
+                                                    onFailure={responseErrorGoogle}
+                                                    cookiePolicy={'single_host_origin'}
+                                                />
                                             </Button>
                                         </Col>
                                         <Col md="1" sm="1" xs="3">
@@ -259,13 +372,13 @@ const LoginForm = () => {
                                 </form>
                             </div>
                         </div>
-                        {loginWithFace ?(
+                        {loginWithFace ? (
                             <>
                                 <div className="col-xl-6 d-lg-inline-block">
                                     <SignInWithFace/>
                                 </div>
                             </>
-                        ) :(
+                        ) : (
                             <>
                                 <div className="col-xl-6 d-lg-inline-block">
                                     <img src="/images/bg/WallpaperLogin.png" className="img-fluid" alt="architeck"/>

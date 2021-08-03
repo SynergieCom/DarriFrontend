@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import * as faceapi from 'face-api.js';
 import '../../../assets/VideoStyle.css';
-import MuiAlert from "@material-ui/lab/Alert";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import {useHistory} from "react-router-dom";
 import {UncontrolledAlert} from "reactstrap";
@@ -45,7 +44,7 @@ const SignInWithFace = () => {
                 setError({
                     visible: true,
                     message: "Please Make sure that your camera is activated and reload page",
-                    severity: "error"
+                    severity: "danger"
                 });
             }
         )
@@ -81,6 +80,7 @@ const SignInWithFace = () => {
         }
 
         videoRef.current.srcObject = null;
+        history.go(0);
     }
 
 
