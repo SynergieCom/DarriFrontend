@@ -4,6 +4,8 @@ import {useFormik} from "formik";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import * as Yup from "yup";
 import {useHistory} from "react-router";
+import defaultAvatar from "../../../assets/img/placeholder.jpg";
+
 
 function EditUserForm(props) {
     const history = useHistory();
@@ -88,7 +90,11 @@ function EditUserForm(props) {
                 "ZipCode": res.Address.ZipCode,
                 "Role": res.Role
             })
-            setImagePreviewUrl(process.env.REACT_APP_API_URL_UPLOADS + "/" + res.img)
+            if (res.img != null) {
+                setImagePreviewUrl(process.env.REACT_APP_API_URL_UPLOADS + "/" + res.img);
+            }else {
+                setImagePreviewUrl(defaultAvatar);
+            }
         }
 
         fetchDataForm().then(r => console.log("-> ", "DONE"));

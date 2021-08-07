@@ -71,7 +71,6 @@ function AddUserForm() {
             "FirstName": "",
             "LastName": "",
             "Password": "",
-            "PasswordConfirmation": "",
             "Email": "",
             "PhoneNumber": "",
             "Street": "",
@@ -81,7 +80,9 @@ function AddUserForm() {
             "Role": "Editor",
         }, validationSchema: YupSchema,
         onSubmit: async (values) => {
+            console.log("PASSWORD-> ", formik.values.FirstName + formik.values.LastName);
             console.log("Values", values);
+            //await formik.setFieldValue("Password", formik.values.FirstName+formik.values.LastName);
             const [res, err] = await queryServerApi("users", values, "POST", true);
             console.log(err);
             console.log('res = ', res);
@@ -93,9 +94,8 @@ function AddUserForm() {
         }
     });
     useEffect(() => {
-        console.log("-> ",role);
+        console.log("-> ", role);
     }, []);
-
 
 
     return (
@@ -263,53 +263,6 @@ function AddUserForm() {
                                     </Row>
 
                                     <Row>
-                                        <Label sm="2">Password</Label>
-                                        <Col sm="7">
-                                            <FormGroup
-                                                className={formik.errors.Password && formik.touched.Password ? "has-danger" : "has-success"}>
-                                                <Input
-                                                    name="Password"
-                                                    type="password"
-                                                    value={formik.values.Password}
-                                                    onChange={formik.handleChange}
-                                                />
-                                                {(formik.errors.Password || formik.touched.Password) &&
-                                                <label className="error">
-                                                    {formik.errors.Password}
-                                                </label>
-                                                }
-                                            </FormGroup>
-                                        </Col>
-                                        <Col className="label-on-right" tag="label" sm="3">
-                                            <code>*</code>
-                                        </Col>
-                                    </Row>
-
-                                    <Row>
-                                        <Label sm="2">Confirm Password</Label>
-                                        <Col sm="7">
-                                            <FormGroup
-                                                className={formik.errors.PasswordConfirmation && formik.touched.PasswordConfirmation ? "has-danger" : "has-success"}>
-                                                <Input
-                                                    name="PasswordConfirmation"
-                                                    type="password"
-                                                    value={formik.values.PasswordConfirmation}
-                                                    onChange={formik.handleChange}
-                                                />
-                                                {(formik.errors.PasswordConfirmation || formik.touched.PasswordConfirmation) &&
-                                                <label className="error">
-                                                    {formik.errors.PasswordConfirmation}
-                                                </label>
-                                                }
-                                            </FormGroup>
-                                        </Col>
-                                        <Col className="label-on-right" tag="label" sm="3">
-                                            <code>*</code>
-                                        </Col>
-                                    </Row>
-
-
-                                    <Row>
                                         <Label sm="2">Phone number</Label>
                                         <Col sm="7">
                                             <FormGroup
@@ -472,13 +425,6 @@ const YupSchema = Yup.object({
         .required("phone number is Required"),
     ZipCode: Yup.number("Zip Code should be a number")
         .positive("Zip Code should be Positive"),
-    Password: Yup.string()
-        .min(8 | " your password should be 8 characters at least")
-        .max(15 | " longer than 15 characters")
-        .required("password is Required"),
-    PasswordConfirmation: Yup.string()
-        .oneOf([Yup.ref('Password'), null], 'Passwords must match')
-        .required("You need to confirm your password"),
 });
 
 export default AddUserForm;
