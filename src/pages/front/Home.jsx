@@ -14,6 +14,7 @@ import BannerHome from "../../components/front/Home/BannerHome";
 import Whychoose from "../../ArchitekComponentAndPages/Home/Construction/Whychoose";
 import NavBarHome from "../../components/front/Home/NavBarHome";
 import {BrowserRouter,useParams} from "react-router-dom";
+import HomeCustomerService from "../../components/front/Home/HomeCustomerService";
 
 const Home = () => {
     const username = localStorage.getItem("username");
@@ -29,6 +30,7 @@ const Home = () => {
             {/*Default Feed*/}
             <Process/>
             <Video/>
+            <HomeCustomerService/>
             <Whychoose />
             <Aboutus/>
             <Working/>

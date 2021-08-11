@@ -93,9 +93,7 @@ function AddUserForm() {
             }
         }
     });
-    useEffect(() => {
-        console.log("-> ", role);
-    }, []);
+
 
 
     return (

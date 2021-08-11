@@ -13,6 +13,7 @@ import Login from "./pages/front/Login";
 import NotFound from "./pages/front/404NotFound";
 import ResetPassword from "./pages/front/ResetPassword";
 import NewPassword from "./pages/front/NewPassword";
+import SignUpCustomer from "./pages/front/SignUpCustomer";
 
 function App() {
     const username = localStorage.getItem("username");
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/Login" component={Login}/>
                     <Route path="/ResetPassword" component={ResetPassword}/>
                     <Route path="/ResetNewPassword" component={NewPassword}/>
+                    <Route path="/SignUpCustomer" component={SignUpCustomer}/>
                     </Switch>
                 )}
             </Router>

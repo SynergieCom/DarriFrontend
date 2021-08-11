@@ -5,7 +5,9 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/pickers": "^3.3.10",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
@@ -17,6 +19,9 @@
     "flat-icons": "^1.0.0",
     "font-awesome": "^4.7.0",
     "formik": "^2.2.9",
+    "formik-material-ui": "^3.0.1",
+    "formik-material-ui-lab": "^0.0.8",
+    "formik-material-ui-pickers": "^0.0.12",
     "match-sorter": "6.3.0",
     "moment": "2.29.1",
     "node-sass": "6.0.0",
@@ -44,6 +49,7 @@
     "react-tagsinput": "3.19.0",
     "reactstrap": "8.9.0",
     "style-sheet": "^4.0.4",
+    "typescript": "^4.3.5",
     "web-vitals": "^1.1.0",
     "yup": "^0.32.9"
   },
@@ -76,6 +82,7 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^4.29.0",
     "eslint": "^7.31.0",
     "prettier": "2.3.2"
   }
