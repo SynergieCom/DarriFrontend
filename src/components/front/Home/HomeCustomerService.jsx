@@ -13,10 +13,8 @@ const Explore = () => {
          <div className="container">
             <div className="row">
                <div className="col-xl-6 mb-4 mb-lg-0">
-                  <div className="about-img-block">
-                     <img className="img-fluid about-img-0" src="images/about/demo-3.png" alt="background_image"/>
-                     <img className="img-fluid about-img-1" src="images/about/demo-4.png" alt="background_image"/>
-                     <img className="img-fluid about-img-2" src="images/about/demo-5.png" alt="background_image"/>
+                  <div className="about-img-4 pt-opacity4">
+                     <img className="img-fluid about-img-4" src="images/Housings.png" alt="background_image"/>
                   </div>
                </div>
                <div className="col-xl-6  d-flex align-items-center">

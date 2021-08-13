@@ -14,6 +14,9 @@ import NotFound from "./pages/front/404NotFound";
 import ResetPassword from "./pages/front/ResetPassword";
 import NewPassword from "./pages/front/NewPassword";
 import SignUpCustomer from "./pages/front/SignUpCustomer";
+import ActivatedAccount from "./pages/front/ActivatedAccount";
+import SignUpArchitectFrom from "./components/front/SingUpArchitectForm/SignUpArchitectrFrom";
+import SignUpArchitect from "./pages/front/SignUpArchitect";
 
 function App() {
     const username = localStorage.getItem("username");
@@ -22,7 +25,7 @@ function App() {
     return (
         <>
             <Router basename="/">
-                {username != null && (role==="Admin" || role==="Editor") ? (
+                {username != null && (role === "Admin" || role === "Editor") ? (
                     <Switch>
                         <Redirect exact from="/" to="/admin/dashboard"/>
                         <Route
@@ -36,11 +39,14 @@ function App() {
                     </Switch>
                 ) : (
                     <Switch>
-                    <Route path="/" exact={true} component={Home}/>
-                    <Route path="/Login" component={Login}/>
-                    <Route path="/ResetPassword" component={ResetPassword}/>
-                    <Route path="/ResetNewPassword" component={NewPassword}/>
-                    <Route path="/SignUpCustomer" component={SignUpCustomer}/>
+                        <Route path="/" exact={true} component={Home}/>
+                        <Route path="/Login" component={Login}/>
+                        <Route path="/ResetPassword" component={ResetPassword}/>
+                        <Route path="/ResetNewPassword" component={NewPassword}/>
+                        <Route path="/SignUpCustomer" component={SignUpCustomer}/>
+                        <Route path="/SignUpArchitect" component={SignUpArchitect}/>
+                        <Route path="/ActivatedAccount" component={ActivatedAccount}/>
+
                     </Switch>
                 )}
             </Router>

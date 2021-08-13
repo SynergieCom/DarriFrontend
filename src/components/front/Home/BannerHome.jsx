@@ -85,7 +85,7 @@ const BannerHome = () => {
                             </rs-layer>
                             <a href="/aboutus">
 
-                                <rs-layer id="slider-1-slide-1-layer-4" href="/aboutme" className="rev-btn"
+                                <rs-layer id="slider-1-slide-1-layer-4" href="/SignUpArchitect" className="rev-btn"
                                           data-type="button" data-rsp_ch="on"
                                           data-xy="xo:45px,40px,30px,15px;y:m;yo:204px,180px,125px,63px;"
                                           data-text="w:normal;s:16,16,16,18;l:32,30,32,30;"

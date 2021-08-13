@@ -7,6 +7,7 @@ import {useFormik} from "formik";
 import SignInWithFace from "./SignInWithFace";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from 'react-facebook-login';
+import FaceIcon from '@material-ui/icons/Face';
 
 
 const LoginForm = () => {
@@ -431,7 +432,7 @@ const LoginForm = () => {
 
                                             <Button className="btn-round btn-icon" color="danger"
                                                     onClick={LoginWithFaceRecognition}>
-                                                <i className="fa fa-user"/>
+                                                <FaceIcon/>
                                             </Button>
                                         </Col>
                                         <Col md="1" sm="1" xs="3">

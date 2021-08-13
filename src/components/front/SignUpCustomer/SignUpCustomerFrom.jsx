@@ -14,8 +14,8 @@ import {
     Radio
 } from "@material-ui/core";
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import {FormikStepper} from "./FormikStepper";
-import {FormikStep} from "./FormikStep";
+import {FormikStepperCustomer} from "./FormikStepperCustomer";
+import {FormikStep} from "../FormikStep";
 import {makeStyles} from "@material-ui/core/styles";
 import defaultAvatar from "../../../assets/img/placeholder.jpg";
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
@@ -126,7 +126,8 @@ export default function SignUpCustomerFrom(props) {
             message: (
                 <div>
                     <div>
-                        Congratulations ! your registry is done successfully , <strong> Please Activate Your Account via the
+                        Congratulations ! your registry is done successfully , <strong> Please Activate Your Account via
+                        the
                         confirmation Email </strong>
                     </div>
                 </div>
@@ -141,7 +142,7 @@ export default function SignUpCustomerFrom(props) {
 
     return (
         <>
-            <NotificationAlert ref={notificationAlert} />
+            <NotificationAlert ref={notificationAlert}/>
             <section className=" conatct pt-contact-form pt-section-overlap pt-12">
                 <div className="container">
                     <div className="row no-gutters">
@@ -154,7 +155,7 @@ export default function SignUpCustomerFrom(props) {
                                     <span className="pt-section-sub-title">Sign Up</span>
                                     <h2 className="pt-section-title">Sign Up as customer</h2>
                                 </div>
-                                <FormikStepper initialValues={{
+                                <FormikStepperCustomer initialValues={{
                                     Username: "",
                                     Cin: "",
                                     FirstName: "",
@@ -171,53 +172,53 @@ export default function SignUpCustomerFrom(props) {
                                     DayOfBirth: "",
                                     Role: "Customer",
                                 }}
-                                               submitted={submitted}
-                                               completed={completed}
-                                               success={success}
-                                               error={error}
-                                               onSubmit={async (values) => {
-                                                   await setSubmitted(true);
-                                                   setTimeout(async () => {
-                                                       console.log("-> values", values);
-                                                       setSubmitted(false);
-                                                       setCompleted(true);
+                                                       submitted={submitted}
+                                                       completed={completed}
+                                                       success={success}
+                                                       error={error}
+                                                       onSubmit={async (values) => {
+                                                           await setSubmitted(true);
+                                                           setTimeout(async () => {
+                                                               console.log("-> values", values);
+                                                               setSubmitted(false);
+                                                               setCompleted(true);
 
-                                                       const [res, err] = await queryServerApi("customers/add", values, "POST", true);
-                                                       console.log(err);
-                                                       console.log('res = ', res);
-                                                       if (res === "UserNameExist") {
-                                                           setError({
-                                                               visible: true,
-                                                               message: "Username already exist",
-                                                               UserNameErr: true
-                                                           });
-                                                       } else if (res === "CinExist") {
-                                                           setError({
-                                                               visible: true,
-                                                               message: "Cin  already exist",
-                                                               CinErr: true
-                                                           });
-                                                       } else if (res === "EmailExist") {
-                                                           setError({
-                                                               visible: true,
-                                                               message: "This email address is already registered. If it belongs to you, \n" +
-                                                                   "log in above or visit our account recovery page to get access to this account.",
-                                                               EmailExist: true
-                                                           });
-                                                       } else if (err) {
-                                                           console.log('error', err)
-                                                           setError({
-                                                               visible: true,
-                                                               message: JSON.stringify(err.errors, null, 2),
-                                                           });
-                                                       } else {
-                                                           notify("tr");
-                                                           setSuccess(true);
-                                                           setError({visible: false});
-                                                       }
+                                                               const [res, err] = await queryServerApi("customers/add", values, "POST", true);
+                                                               console.log(err);
+                                                               console.log('res = ', res);
+                                                               if (res === "UserNameExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Username already exist",
+                                                                       UserNameErr: true
+                                                                   });
+                                                               } else if (res === "CinExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Cin  already exist",
+                                                                       CinErr: true
+                                                                   });
+                                                               } else if (res === "EmailExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "This email address is already registered. If it belongs to you, \n" +
+                                                                           "log in above or visit our account recovery page to get access to this account.",
+                                                                       EmailExist: true
+                                                                   });
+                                                               } else if (err) {
+                                                                   console.log('error', err)
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: JSON.stringify(err.errors, null, 2),
+                                                                   });
+                                                               } else {
+                                                                   notify("tr");
+                                                                   setSuccess(true);
+                                                                   setError({visible: false});
+                                                               }
 
-                                                   }, 3000);
-                                               }}
+                                                           }, 3000);
+                                                       }}
                                 >
                                     {/* First Step */}
                                     <FormikStep label="About" validationSchema={YupSchemaStep1}>
@@ -306,6 +307,10 @@ export default function SignUpCustomerFrom(props) {
                                             <Field fullWidth type="email" name="Email" component={TextField}
                                                    label="Email"/>
                                         </Box>
+                                        <Box paddingBottom={2}>
+                                            <Field fullWidth type="Number" name="PhoneNumber" component={TextField}
+                                                   label="Phone Number"/>
+                                        </Box>
 
                                         <Box paddingBottom={2}>
 
@@ -324,8 +329,9 @@ export default function SignUpCustomerFrom(props) {
                                     </FormikStep>
                                     {/* Third Step */}
 
-                                    <FormikStep label={error.visible? "Error" : completed ? "Completed" : success ? "Success" : "Address" }
-                                                validationSchema={YupSchemaStep3}>
+                                    <FormikStep
+                                        label={error.visible ? "Error" : completed ? "Completed" : success ? "Success" : "Address"}
+                                        validationSchema={YupSchemaStep3}>
                                         <Box paddingBottom={2}>
 
                                             <Field fullWidth type="text" name="City" component={TextField} label="City"
@@ -358,7 +364,7 @@ export default function SignUpCustomerFrom(props) {
                                             }}/>
                                         </Box>
                                     </FormikStep>
-                                </FormikStepper>
+                                </FormikStepperCustomer>
                             </div>
                         </div>
                     </div>
@@ -377,6 +383,9 @@ const YupSchemaStep1 = Yup.object({
         .required("First Name is Required"),
     LastName: Yup.string()
         .required("Last Name is Required"),
+    DayOfBirth: Yup.date()
+        .required("Creation Date is required")
+        .max(new Date(), "you can't choose a future date"),
 });
 
 
@@ -387,6 +396,9 @@ const YupSchemaStep2 = Yup.object(
         Email: Yup.string()
             .email("No valid Email ")
             .required("email is Required"),
+        PhoneNumber: Yup.number("Phone Number should be a number")
+            .positive("the Phone Number Number should be positive")
+            .required("PhoneNumber is required"),
         Password: Yup.string()
             .min(8 | " your password should be 8 characters at least")
             .max(15 | " longer than 15 characters")

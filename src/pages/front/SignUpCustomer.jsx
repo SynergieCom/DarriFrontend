@@ -8,7 +8,7 @@ import NavBarHome from "../../components/front/Home/NavBarHome";
 import LoginForm from "../../components/front/Login/LoginForm";
 import SignUpCustomerFrom from "../../components/front/SignUpCustomer/SignUpCustomerFrom";
 
-const Login = () => {
+const SigUpCustomer = () => {
     return (
         <>
             <Loader/>
@@ -21,7 +21,7 @@ const Login = () => {
             <br/><br/>
             <br/><br/>
 
-            <SignUpCustomerFrom />
+            <SignUpCustomerFrom/>
 
             <Action/>
             <Footer/>
@@ -30,4 +30,4 @@ const Login = () => {
     );
 
 }
-export default Login;
+export default SigUpCustomer;
