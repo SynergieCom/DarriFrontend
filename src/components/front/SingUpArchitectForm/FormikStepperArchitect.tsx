@@ -209,8 +209,9 @@ export function FormikStepperArchitect({children, ...props}: FormikConfig<Formik
                     :
                     // @ts-ignore
                     <Alert color="success" fade={false}>
-                        <h1>Congratulations ! your registry is done successfully , Please Activate Your Account via the
-                            confirmation Email </h1>
+                        <h1>Done your form has submitted successfully <br/>
+                            <strong>next step after 10 seconds ...</strong>
+                            now choose your subscription and continue the payment process to profit of our service</h1>
                     </Alert>
                 }
 

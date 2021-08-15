@@ -18,7 +18,7 @@ const HomeArchitectService = () => {
     return (
         <>
             <section className=" working-with-excellent pt-q pt-bg-dark  wow animate__fadeIn" data-wow-delay="0.2s">
-                <div className="pt-bg-primary pt-opacity5" style={{backgroundImage: "url('images/Archi7.png')"}}></div>
+                <div className="pt-bg-effect" style={{backgroundImage: "url('images/Archi4.png')"}}></div>
                 <div className="container">
                     <div className="row ">
                         <div className="col-xl-6">

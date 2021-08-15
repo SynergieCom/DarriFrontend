@@ -23,8 +23,10 @@ import NotificationAlert from "react-notification-alert";
 import {FormikStepperArchitect} from "./FormikStepperArchitect";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import {Select} from 'formik-material-ui';
+import {useHistory} from "react-router";
 
 export default function SignUpArchitectFrom(props) {
+    const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [completed, setCompleted] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -201,9 +203,9 @@ export default function SignUpArchitectFrom(props) {
             message: (
                 <div>
                     <div>
-                        Congratulations ! your registry is done successfully , <strong> Please Activate Your Account via
-                        the
-                        confirmation Email </strong>
+                        Done your form has submitted successfully <br/>
+                        <strong>next step after 10 seconds ...</strong>
+                        now choose your subscription and continue the payment process to profit of our service
                     </div>
                 </div>
             ),
@@ -294,10 +296,11 @@ export default function SignUpArchitectFrom(props) {
                                                                     notify("tr");
                                                                     setSuccess(true);
                                                                     setError({visible: false});
+                                                                    setTimeout(async () => {
+                                                                        history.push(`/Pricing?id=${res}`);
+                                                                        history.go(0);
+                                                                    }, 10000);
                                                                 }
-
-
-
                                                             }, 3000);
                                                         }}
                                 >

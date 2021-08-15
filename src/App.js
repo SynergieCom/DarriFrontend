@@ -17,6 +17,7 @@ import SignUpCustomer from "./pages/front/SignUpCustomer";
 import ActivatedAccount from "./pages/front/ActivatedAccount";
 import SignUpArchitectFrom from "./components/front/SingUpArchitectForm/SignUpArchitectrFrom";
 import SignUpArchitect from "./pages/front/SignUpArchitect";
+import Pricing from "./pages/front/Pricing";
 
 function App() {
     const username = localStorage.getItem("username");
@@ -45,6 +46,7 @@ function App() {
                         <Route path="/ResetNewPassword" component={NewPassword}/>
                         <Route path="/SignUpCustomer" component={SignUpCustomer}/>
                         <Route path="/SignUpArchitect" component={SignUpArchitect}/>
+                        <Route path="/Pricing" component={Pricing}/>
                         <Route path="/ActivatedAccount" component={ActivatedAccount}/>
 
                     </Switch>

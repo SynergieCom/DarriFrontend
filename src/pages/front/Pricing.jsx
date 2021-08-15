@@ -5,26 +5,24 @@ import Footer from '../../components/front/Footer';
 import ScrollTop from '../../components/front/ScrollTop';
 import Loader from '../../components/front/Loader';
 import NavBarHome from "../../components/front/Home/NavBarHome";
-import SignUpArchitectFrom from "../../components/front/SingUpArchitectForm/SignUpArchitectrFrom";
+import LoginForm from "../../components/front/Login/LoginForm";
+import PricingComponent from "../../components/front/Pricing/PricingComponent";
+import {useLocation, useParams} from "react-router";
 
-const SigUpArchitect = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+const Login = () => {
+    const query = useQuery();
+    const id = query.get('id');
+
     return (
         <>
             <Loader/>
             <NavBarHome/>
             <Sidebar/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-            <br/><br/>
-
-            <SignUpArchitectFrom/>
-
+            <PricingComponent id={id}/>
             <Action/>
             <Footer/>
             <ScrollTop/>
@@ -32,4 +30,4 @@ const SigUpArchitect = () => {
     );
 
 }
-export default SigUpArchitect;
+export default Login;
