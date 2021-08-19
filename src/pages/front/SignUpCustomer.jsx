@@ -19,7 +19,6 @@ const SigUpCustomer = () => {
             <br/><br/>
             <br/><br/>
             <br/><br/>
-            <br/><br/>
 
             <SignUpCustomerFrom/>
 

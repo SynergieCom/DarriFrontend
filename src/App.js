@@ -18,6 +18,7 @@ import ActivatedAccount from "./pages/front/ActivatedAccount";
 import SignUpArchitectFrom from "./components/front/SingUpArchitectForm/SignUpArchitectrFrom";
 import SignUpArchitect from "./pages/front/SignUpArchitect";
 import Pricing from "./pages/front/Pricing";
+import Payment from "./pages/front/Payment";
 
 function App() {
     const username = localStorage.getItem("username");
@@ -47,6 +48,7 @@ function App() {
                         <Route path="/SignUpCustomer" component={SignUpCustomer}/>
                         <Route path="/SignUpArchitect" component={SignUpArchitect}/>
                         <Route path="/Pricing" component={Pricing}/>
+                        <Route path="/Payment" component={Payment}/>
                         <Route path="/ActivatedAccount" component={ActivatedAccount}/>
 
                     </Switch>

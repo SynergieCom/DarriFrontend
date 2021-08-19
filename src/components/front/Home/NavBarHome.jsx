@@ -24,7 +24,7 @@ const NavBarHome = () => {
                 <div className="row no-gutters">
                     <div className="col-lg-2 col-md-4">
                         <a className="navbar-brand" href="/#">
-                            <h2>Darri</h2>
+                            <h2 style={{color:"white"}}>DARRI</h2>
                             {/*<img className="img-fluid logo" src="images/logo-white.png" alt="architeck"/> */}
                         </a>
                     </div>

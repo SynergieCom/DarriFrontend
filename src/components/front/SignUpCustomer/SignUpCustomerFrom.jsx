@@ -144,12 +144,15 @@ export default function SignUpCustomerFrom(props) {
         <>
             <NotificationAlert ref={notificationAlert}/>
             <section className=" conatct pt-contact-form pt-section-overlap pt-12">
+                <div className="pt-bg-overley pt-opacity1 "
+                     style={{backgroundImage: "url('images/Archi5.jpg')",backgroundColor: "red"}}>
+                </div>
                 <div className="container">
                     <div className="row no-gutters">
                         <div className="col-xl-12 z-index-1">
                             <div className="form p-5 pr-md-5 pt-bg-light">
                                 <div className="pt-bg-overley pt-opacity1 "
-                                     style={{backgroundColor: "red"}}>
+                                     style={{backgroundImage: "url('images/Archi.jpg')",backgroundColor: "red"}}>
                                 </div>
                                 <div className="pt-section-title-box">
                                     <span className="pt-section-sub-title">Sign Up</span>
@@ -227,7 +230,7 @@ export default function SignUpCustomerFrom(props) {
                                             <Grid container spacing={2}>
                                                 <Grid item xs={5}>
                                                     <div className="fileinput text-center">
-                                                        <div className={"thumbnail img-circle"}>
+                                                        <div className={"thumbnail img-circle"} style={{backgroundColor: "black"}}>
                                                             <img src={imagePreviewUrl} alt="..."/>
                                                         </div>
                                                     </div>

@@ -21,7 +21,6 @@ const SigUpArchitect = () => {
             <br/><br/>
             <br/><br/>
             <br/><br/>
-            <br/><br/>
 
             <SignUpArchitectFrom/>
 

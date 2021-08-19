@@ -10,8 +10,11 @@ const PricingComponent = (props) => {
 
     return (
         <>
-            <section className="pricing">
-                <div className="container">
+            <section className="pricing" >
+                <div className="pt-bg-overley pt-opacity2 "
+                     style={{backgroundImage: "url('images/Archi5.jpg')",backgroundColor: "red"}}>
+                </div>
+                <div className="container" >
                     <div className="row">
                         <div className=" col-xl-2">
                         </div>
@@ -37,6 +40,7 @@ const PricingComponent = (props) => {
                             price=" 29.00 DT"
                             id={id}
                             amount={29}
+                            userType={"Architect"}
                             time="Per Month"
                             f1="Five brand monitors"
                             f2={<del>12-month fixed price</del>}
@@ -51,6 +55,7 @@ const PricingComponent = (props) => {
                             price="69.00 DT"
                             amount={69}
                             id={id}
+                            userType={"Engineer"}
                             time="Per Month"
                             f1="Five brand monitors"
                             f2="12-month fixed price"
@@ -65,6 +70,7 @@ const PricingComponent = (props) => {
                             price="99.00 DT"
                             amount={99}
                             id={id}
+                            userType={"Promoter"}
                             time="Per Month"
                             f1="Five brand monitors"
                             f2="12-month fixed price"

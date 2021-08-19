@@ -16,7 +16,10 @@ const PricingCard = (prop) => {
         }, "PUT", false);
         if (err) {
             console.log(err);
-        } else history.push("/Payment?amount=" + amount + "&id=" +  prop.id + "&userType=Company")
+        } else {
+            history.push(`/Payment?amount=${amount}&id=${prop.id}&userType=${prop.userType}`);
+            history.go(0);
+        }
     }
 
     return (
@@ -39,7 +42,7 @@ const PricingCard = (prop) => {
                     <li>{prop.f6}</li>
                 </ul>
                 <div className="pt-button pt-btn-flat">
-                    <div className="pt-button-block" onClick={()=>updateSubscription(prop.amount)}>
+                    <div className="pt-button-block" onClick={() => updateSubscription(prop.amount)}>
                         <span className="pt-button-line-left"></span>
                         <span className="pt-button-text">Subscribe</span>
                         <span className="pt-button-line-right"></span>
