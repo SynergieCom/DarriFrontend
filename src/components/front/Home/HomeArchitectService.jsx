@@ -11,7 +11,8 @@ const HomeArchitectService = () => {
       history.go(0);
     }
     const SignEngineer = () => {
-
+        history.push("/SignUpEngineer");
+        history.go(0);
     }
 
 

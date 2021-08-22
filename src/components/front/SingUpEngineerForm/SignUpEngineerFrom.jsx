@@ -20,12 +20,12 @@ import defaultAvatar from "../../../assets/img/placeholder.jpg";
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import {queryServerApi} from "../../../utils/queryServerApi";
 import NotificationAlert from "react-notification-alert";
-import {FormikStepperArchitect} from "./FormikStepperArchitect";
+import {FormikStepperEngineer} from "./FormikStepperEngineer";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import {Select} from 'formik-material-ui';
 import {useHistory} from "react-router";
 
-export default function SignUpArchitectFrom(props) {
+export default function SignUpEngineerForm(props) {
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [completed, setCompleted] = useState(false);
@@ -227,19 +227,19 @@ export default function SignUpArchitectFrom(props) {
             <section className=" conatct pt-contact-form pt-section-overlap pt-12">
                 <div className="container">
                     <div className="pt-bg-overley pt-opacity1 "
-                         style={{backgroundImage: "url('images/Archi5.jpg')",backgroundColor: "red"}}>
+                         style={{backgroundImage: "url('images/Archi5.jpg')", backgroundColor: "red"}}>
                     </div>
                     <div className="row no-gutters">
                         <div className="col-xl-12 z-index-1">
                             <div className="form p-5 pr-md-5 pt-bg-light">
                                 <div className="pt-bg-overley pt-opacity1 "
-                                     style={{backgroundImage: "url('images/Archi6.jpg')",backgroundColor: "red"}}>
+                                     style={{backgroundImage: "url('images/Archi1.jpg')", backgroundColor: "red"}}>
                                 </div>
                                 <div className="pt-section-title-box">
                                     <span className="pt-section-sub-title">Sign Up</span>
-                                    <h2 className="pt-section-title">Sign Up as Architect</h2>
+                                    <h2 className="pt-section-title">Sign Up as Engineer</h2>
                                 </div>
-                                <FormikStepperArchitect initialValues={{
+                                <FormikStepperEngineer initialValues={{
                                     Username: "",
                                     Cin: "",
                                     FirstName: "",
@@ -257,59 +257,59 @@ export default function SignUpArchitectFrom(props) {
                                     Role: "Architect",
                                     NationalEngineeringId: "",
                                     Bio: "",
-                                    Type: "",
+                                    Speciality: "",
                                     NbExperienceYears: "",
                                 }}
-                                                        submitted={submitted}
-                                                        completed={completed}
-                                                        success={success}
-                                                        error={error}
-                                                        onSubmit={async (values) => {
-                                                            await setSubmitted(true);
-                                                            setTimeout(async () => {
-                                                                console.log("-> values", values);
-                                                                setSubmitted(false);
-                                                                setCompleted(true);
+                                                       submitted={submitted}
+                                                       completed={completed}
+                                                       success={success}
+                                                       error={error}
+                                                       onSubmit={async (values) => {
+                                                           await setSubmitted(true);
+                                                           setTimeout(async () => {
+                                                               console.log("-> values", values);
+                                                               setSubmitted(false);
+                                                               setCompleted(true);
 
-                                                                const [res, err] = await queryServerApi("architects/Add", values, "POST", true);
-                                                                console.log(err);
-                                                                console.log('res = ', res);
-                                                                if (res === "UserNameExist") {
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: "Username already exist",
-                                                                        UserNameErr: true
-                                                                    });
-                                                                } else if (res === "CinExist") {
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: "Cin  already exist",
-                                                                        CinErr: true
-                                                                    });
-                                                                } else if (res === "EmailExist") {
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: "This email address is already registered. If it belongs to you, \n" +
-                                                                            "log in above or visit our account recovery page to get access to this account.",
-                                                                        EmailExist: true
-                                                                    });
-                                                                } else if (err) {
-                                                                    console.log('error', err)
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: JSON.stringify(err.errors, null, 2),
-                                                                    });
-                                                                } else {
-                                                                    notify("tr");
-                                                                    setSuccess(true);
-                                                                    setError({visible: false});
-                                                                    setTimeout(async () => {
-                                                                        history.push(`/Pricing?id=${res}`);
-                                                                        history.go(0);
-                                                                    }, 10000);
-                                                                }
-                                                            }, 3000);
-                                                        }}
+                                                               const [res, err] = await queryServerApi("engineers/Add", values, "POST", true);
+                                                               console.log(err);
+                                                               console.log('res = ', res);
+                                                               if (res === "UserNameExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Username already exist",
+                                                                       UserNameErr: true
+                                                                   });
+                                                               } else if (res === "CinExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Cin  already exist",
+                                                                       CinErr: true
+                                                                   });
+                                                               } else if (res === "EmailExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "This email address is already registered. If it belongs to you, \n" +
+                                                                           "log in above or visit our account recovery page to get access to this account.",
+                                                                       EmailExist: true
+                                                                   });
+                                                               } else if (err) {
+                                                                   console.log('error', err)
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: JSON.stringify(err.errors, null, 2),
+                                                                   });
+                                                               } else {
+                                                                   notify("tr");
+                                                                   setSuccess(true);
+                                                                   setError({visible: false});
+                                                                   setTimeout(async () => {
+                                                                       history.push(`/Pricing?id=${res}`);
+                                                                       history.go(0);
+                                                                   }, 10000);
+                                                               }
+                                                           }, 3000);
+                                                       }}
                                 >
                                     {/* First Step */}
                                     <FormikStep label="About" validationSchema={YupSchemaStep1}>
@@ -318,7 +318,8 @@ export default function SignUpArchitectFrom(props) {
                                             <Grid container spacing={2}>
                                                 <Grid item xs={5}>
                                                     <div className="fileinput text-center">
-                                                        <div className={"thumbnail img-circle"} style={{backgroundColor: "black"}}>
+                                                        <div className={"thumbnail img-circle"}
+                                                             style={{backgroundColor: "black"}}>
                                                             <img src={imagePreviewUrl} alt="..."/>
                                                         </div>
                                                     </div>
@@ -420,7 +421,7 @@ export default function SignUpArchitectFrom(props) {
                                     </FormikStep>
 
 
-                                    <FormikStep label="Architect Details" validationSchema={YupSchemaStep3}>
+                                    <FormikStep label="Engineer Details" validationSchema={YupSchemaStep3}>
                                         <Grid container spacing={4}>
 
                                             <Grid item xs={5}>
@@ -449,14 +450,14 @@ export default function SignUpArchitectFrom(props) {
 
                                             <Grid item xs={7}>
                                                 <InputLabel
-                                                    id="demo-simple-select-placeholder-label-label">Type</InputLabel>
+                                                    id="demo-simple-select-placeholder-label-label">Speciality</InputLabel>
                                                 <Field
                                                     labelId="demo-simple-select-placeholder-label-label"
                                                     id="demo-simple-select-placeholder-label"
                                                     fullWidth
                                                     displayEmpty
                                                     component={Select}
-                                                    name="Type"
+                                                    name="Speciality"
                                                     inputProps={{
                                                         id: 'age-simple',
                                                     }}
@@ -464,10 +465,9 @@ export default function SignUpArchitectFrom(props) {
                                                     <MenuItem value="">
                                                         <em>None</em>
                                                     </MenuItem>
-                                                    <MenuItem value="Intérieur">Intérieur</MenuItem>
-                                                    <MenuItem value="Urbaniste">Urbaniste</MenuItem>
-                                                    <MenuItem value="Paysagiste">Paysagiste</MenuItem>
-                                                    <MenuItem value="Extérieur">Extérieur</MenuItem>
+                                                    <MenuItem value="Bâtiment">Bâtiment</MenuItem>
+                                                    <MenuItem value="Géométrique">Géométrique</MenuItem>
+                                                    <MenuItem value="Climatique">Climatique</MenuItem>
                                                 </Field>
                                             </Grid>
 
@@ -525,7 +525,7 @@ export default function SignUpArchitectFrom(props) {
                                             }}/>
                                         </Box>
                                     </FormikStep>
-                                </FormikStepperArchitect>
+                                </FormikStepperEngineer>
                             </div>
                         </div>
                     </div>

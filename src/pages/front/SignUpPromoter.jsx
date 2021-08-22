@@ -1,17 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Sidebar from "../../components/front/Sidebar";
 import Action from '../../components/front/Action';
 import Footer from '../../components/front/Footer';
 import ScrollTop from '../../components/front/ScrollTop';
 import Loader from '../../components/front/Loader';
 import NavBarHome from "../../components/front/Home/NavBarHome";
+import LoginForm from "../../components/front/Login/LoginForm";
+import SignUpCustomerFrom from "../../components/front/SignUpCustomer/SignUpCustomerFrom";
 import SignUpEngineerForm from "../../components/front/SingUpEngineerForm/SignUpEngineerFrom";
 
-const SingUpEngineer = () => {
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+const SingUpPromoter = () => {
     return (
         <>
             <Loader/>
@@ -33,4 +31,4 @@ const SingUpEngineer = () => {
     );
 
 }
-export default SingUpEngineer;
+export default SingUpPromoter;

@@ -19,6 +19,8 @@ import SignUpArchitectFrom from "./components/front/SingUpArchitectForm/SignUpAr
 import SignUpArchitect from "./pages/front/SignUpArchitect";
 import Pricing from "./pages/front/Pricing";
 import Payment from "./pages/front/Payment";
+import SignUpEngineer from "./pages/front/SignUpEngineer";
+import SignUpPromoter from "./pages/front/SignUpPromoter";
 
 function App() {
     const username = localStorage.getItem("username");
@@ -47,6 +49,8 @@ function App() {
                         <Route path="/ResetNewPassword" component={NewPassword}/>
                         <Route path="/SignUpCustomer" component={SignUpCustomer}/>
                         <Route path="/SignUpArchitect" component={SignUpArchitect}/>
+                        <Route path="/SignUpEngineer" component={SignUpEngineer}/>
+                        <Route path="/SignUpPromoter" component={SignUpPromoter}/>
                         <Route path="/Pricing" component={Pricing}/>
                         <Route path="/Payment" component={Payment}/>
                         <Route path="/ActivatedAccount" component={ActivatedAccount}/>

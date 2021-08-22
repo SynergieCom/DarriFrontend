@@ -4,6 +4,16 @@ import {useHistory} from "react-router";
 
 const PricingCard = (prop) => {
     const history = useHistory();
+    const userRole = () => {
+        if (prop.userType === "Architect") {
+            return "architects";
+        } else if (prop.userType === "Engineer") {
+            return "engineers";
+        } else {
+            return "promoters"
+        }
+
+    }
 
     const updateSubscription = async (amount) => {
         var d = new Date();
@@ -11,7 +21,7 @@ const PricingCard = (prop) => {
         var month = d.getMonth();
         var day = d.getDate();
         var newSubscriptionExpirationDate = new Date(year, month + 1, day);
-        const [res, err] = await queryServerApi("architects/UpdateSubscription/" + prop.id, {
+        const [res, err] = await queryServerApi(userRole() + "/UpdateSubscription/" + prop.id, {
             SubscriptionExpirationDate: newSubscriptionExpirationDate,
         }, "PUT", false);
         if (err) {

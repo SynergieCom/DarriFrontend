@@ -20,7 +20,7 @@ import defaultAvatar from "../../../assets/img/placeholder.jpg";
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import {queryServerApi} from "../../../utils/queryServerApi";
 import NotificationAlert from "react-notification-alert";
-import {FormikStepperArchitect} from "./FormikStepperArchitect";
+import {FormikStepperPromoter} from "./FormikStepperPromoter";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import {Select} from 'formik-material-ui';
 import {useHistory} from "react-router";
@@ -239,7 +239,7 @@ export default function SignUpArchitectFrom(props) {
                                     <span className="pt-section-sub-title">Sign Up</span>
                                     <h2 className="pt-section-title">Sign Up as Architect</h2>
                                 </div>
-                                <FormikStepperArchitect initialValues={{
+                                <FormikStepperPromoter initialValues={{
                                     Username: "",
                                     Cin: "",
                                     FirstName: "",
@@ -260,11 +260,11 @@ export default function SignUpArchitectFrom(props) {
                                     Type: "",
                                     NbExperienceYears: "",
                                 }}
-                                                        submitted={submitted}
-                                                        completed={completed}
-                                                        success={success}
-                                                        error={error}
-                                                        onSubmit={async (values) => {
+                                                       submitted={submitted}
+                                                       completed={completed}
+                                                       success={success}
+                                                       error={error}
+                                                       onSubmit={async (values) => {
                                                             await setSubmitted(true);
                                                             setTimeout(async () => {
                                                                 console.log("-> values", values);
@@ -525,7 +525,7 @@ export default function SignUpArchitectFrom(props) {
                                             }}/>
                                         </Box>
                                     </FormikStep>
-                                </FormikStepperArchitect>
+                                </FormikStepperPromoter>
                             </div>
                         </div>
                     </div>
