@@ -20,7 +20,7 @@ const PricingCard = (prop) => {
         var year = d.getFullYear();
         var month = d.getMonth();
         var day = d.getDate();
-        var newSubscriptionExpirationDate = new Date(year, month + 1, day);
+        var newSubscriptionExpirationDate = new Date(year + 1, month, day);
         const [res, err] = await queryServerApi(userRole() + "/UpdateSubscription/" + prop.id, {
             SubscriptionExpirationDate: newSubscriptionExpirationDate,
         }, "PUT", false);
@@ -37,7 +37,9 @@ const PricingCard = (prop) => {
             <div className={prop.cls}>
                 <div className="pt-price-detail">
                     <span className="pt-price-title">{prop.plan}</span>
-                    <h2 className="price">{prop.price}</h2>
+                    <h2 className="price">{prop.price}<br/>                     <p className="pt-price-duration">Per Year</p>
+
+                    </h2>
                     <p className="pt-price-duration">{prop.time}</p>
                     <div className="pt-bg-effect">
                         <img className="img-fluid" src="images/Archi4.jpg" alt="architek"/>

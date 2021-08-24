@@ -8,6 +8,7 @@ import NavBarHome from "../../components/front/Home/NavBarHome";
 import LoginForm from "../../components/front/Login/LoginForm";
 import SignUpCustomerFrom from "../../components/front/SignUpCustomer/SignUpCustomerFrom";
 import SignUpEngineerForm from "../../components/front/SingUpEngineerForm/SignUpEngineerFrom";
+import SignUpPromoterForm from "../../components/front/SingUpPromoterForm/SignUpPromoterFrom";
 
 const SingUpPromoter = () => {
     return (
@@ -20,9 +21,8 @@ const SingUpPromoter = () => {
             <br/><br/>
             <br/><br/>
             <br/><br/>
-            <br/><br/>
 
-            <SignUpEngineerForm/>
+            <SignUpPromoterForm/>
 
             <Action/>
             <Footer/>

@@ -37,11 +37,11 @@ const PricingComponent = (props) => {
                         <PricingCard
                             cls="pt-price-block text-center"
                             plan=" Architect "
-                            price=" 29.00 DT"
+                            price=" 348.00 DT"
                             id={id}
-                            amount={29}
+                            amount={348}
                             userType={"Architect"}
-                            time="Per Month"
+                            time="29 DT Per Month"
                             f1="Five brand monitors"
                             f2={<del>12-month fixed price</del>}
                             f3={<del>Transmission charge</del>}
@@ -52,11 +52,11 @@ const PricingComponent = (props) => {
                         <PricingCard
                             cls="pt-price-block active text-center"
                             plan=" Engineer "
-                            price="69.00 DT"
-                            amount={69}
+                            price="700.00 DT"
+                            amount={700}
                             id={id}
                             userType={"Engineer"}
-                            time="Per Month"
+                            time="34 DT Per Month"
                             f1="Five brand monitors"
                             f2="12-month fixed price"
                             f3={<del>Transmission charge</del>}
@@ -67,11 +67,11 @@ const PricingComponent = (props) => {
                         <PricingCard
                             cls="pt-price-block text-center"
                             plan=" Promoter "
-                            price="99.00 DT"
-                            amount={99}
+                            price="700.00 DT"
+                            amount={700}
                             id={id}
                             userType={"Promoter"}
-                            time="Per Month"
+                            time="34 DT Per Month"
                             f1="Five brand monitors"
                             f2="12-month fixed price"
                             f3="Transmission charge"

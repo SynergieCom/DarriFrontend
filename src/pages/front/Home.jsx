@@ -16,6 +16,7 @@ import NavBarHome from "../../components/front/Home/NavBarHome";
 import {BrowserRouter,useParams} from "react-router-dom";
 import HomeCustomerService from "../../components/front/Home/HomeCustomerService";
 import HomeArchitectService from "../../components/front/Home/HomeArchitectService";
+import HomePromoterService from "../../components/front/Home/HomePromoterService";
 
 const Home = () => {
     const username = localStorage.getItem("username");
@@ -34,7 +35,7 @@ const Home = () => {
             <Whychoose />
             <HomeCustomerService/>
             <HomeArchitectService/>
-            <Aboutus/>
+            <HomePromoterService/>
             <Counter/>
 
 

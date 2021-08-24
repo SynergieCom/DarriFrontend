@@ -22,7 +22,6 @@ const SingUpEngineer = () => {
             <br/><br/>
             <br/><br/>
             <br/><br/>
-            <br/><br/>
 
             <SignUpEngineerForm/>
 

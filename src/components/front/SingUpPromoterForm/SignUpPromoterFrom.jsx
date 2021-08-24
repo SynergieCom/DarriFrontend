@@ -25,11 +25,12 @@ import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import {Select} from 'formik-material-ui';
 import {useHistory} from "react-router";
 
-export default function SignUpArchitectFrom(props) {
+export default function SignUpPromoterForm(props) {
     const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [completed, setCompleted] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [time, setTime] = useState(10);
     const [error, setError] = useState({
         visible: false,
         message: "",
@@ -44,7 +45,6 @@ export default function SignUpArchitectFrom(props) {
 
 
     const [fileState, setFileState] = React.useState(null);
-    const [PdfFileState, setPdfFileState] = React.useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = React.useState(defaultAvatar);
     const fileInput = React.useRef();
 
@@ -117,7 +117,7 @@ export default function SignUpArchitectFrom(props) {
             />
             <label htmlFor="icon-button-file">
                 <IconButton color="default" aria-label="upload picture" component="span">
-                    Avatar
+                    Logo
                     <AddPhotoAlternateIcon/>
                 </IconButton>
             </label>
@@ -128,77 +128,11 @@ export default function SignUpArchitectFrom(props) {
     );
 
 
-    const CustomFileUploadPdf = (props: SimpleFileUploadProps) => (
-        <FormControl>
-            {props.label && (
-                <InputLabel shrink error={!!props.form.error}>
-                    {props.label}
-                </InputLabel>
-            )}
-            <Input
-                error={!!props.form.error || PdfError.visible}
-                inputProps={{
-                    type: 'file',
-                    disabled: props.disabled || props.form.isSubmitting,
-                    name: props.field.name,
-                    onChange: (event: any) => {
-                        const file = event.currentTarget.files[0];
-                        const fileType = ['application/pdf'];
-                        if (file) {
-                            if (file && fileType.includes(file.type)) {
-                                props.form.setFieldValue(props.field.name, file);
-                                event.preventDefault();
-                                let reader = new FileReader();
-                                reader.readAsDataURL(file);
-                                reader.onloadend = () => {
-                                    setPdfFileState(file);
-                                    setPdfError({visible: false, message: ''})
-                                };
-                            } else {
-                                setPdfFileState(null);
-                                setPdfError({visible: true, message: 'please choose valid pdf file'})
-                            }
-                        } else {
-                            console.log("choose your file");
-                        }
-                    }
-                    ,
-
-                }
-                }
-                ref={fileInput}
-                className={classes2.input} id="icon-button-file"
-
-            />
-            <label htmlFor="icon-button-file">
-                <Button
-                    component="span"
-                    variant="contained"
-                    color="secondary"
-                    className={classes3.button}
-                    startIcon={<PictureAsPdfIcon/>}
-                >
-                    Upload Your CV
-                </Button>
-            </label>
-            {props.form.error && (
-                <FormHelperText error>{props.form.error}</FormHelperText>
-            )}
-            {PdfError.visible
-            && (
-                <FormHelperText error>{PdfError.message
-                }</FormHelperText>
-            )}
-            {PdfFileState != null
-            && (
-                <FormHelperText success>{PdfFileState.name}</FormHelperText>
-            )}
-        </FormControl>
-    );
-
-
     const notificationAlert = React.useRef();
     const notify = (place) => {
+        setInterval(() => {
+            setTime(time - 1);
+        }, 1000);
         var color = 2;
         var type = "success";
         var options = {};
@@ -208,7 +142,7 @@ export default function SignUpArchitectFrom(props) {
                 <div>
                     <div>
                         Done your form has submitted successfully <br/>
-                        <strong>next step after 10 seconds ...</strong>
+                        <strong>next step after {time} seconds ...</strong>
                         now choose your subscription and continue the payment process to profit of our service
                     </div>
                 </div>
@@ -227,89 +161,93 @@ export default function SignUpArchitectFrom(props) {
             <section className=" conatct pt-contact-form pt-section-overlap pt-12">
                 <div className="container">
                     <div className="pt-bg-overley pt-opacity1 "
-                         style={{backgroundImage: "url('images/Archi5.jpg')",backgroundColor: "red"}}>
+                         style={{backgroundImage: "url('images/Archi5.jpg')", backgroundColor: "red"}}>
                     </div>
                     <div className="row no-gutters">
                         <div className="col-xl-12 z-index-1">
                             <div className="form p-5 pr-md-5 pt-bg-light">
                                 <div className="pt-bg-overley pt-opacity1 "
-                                     style={{backgroundImage: "url('images/Archi6.jpg')",backgroundColor: "red"}}>
+                                     style={{backgroundImage: "url('images/Archi2.jpg')", backgroundColor: "red"}}>
                                 </div>
                                 <div className="pt-section-title-box">
                                     <span className="pt-section-sub-title">Sign Up</span>
-                                    <h2 className="pt-section-title">Sign Up as Architect</h2>
+                                    <h2 className="pt-section-title">Sign Up as Promoter</h2>
                                 </div>
                                 <FormikStepperPromoter initialValues={{
-                                    Username: "",
-                                    Cin: "",
-                                    FirstName: "",
-                                    LastName: "",
+                                    ResponsibleCin: "",
+                                    ResponsibleName: "",
+                                    CreationYear: "",
+                                    CommercialName: "",
+                                    Activity: "Deactivated",
+                                    RegisterStatus: "",
+                                    RegionalOffice: "",
+                                    Denomination: "",
+                                    TaxSituation: "",
+                                    Email: "",
                                     Password: "",
                                     PasswordConfirmation: "",
-                                    Email: "",
                                     PhoneNumber: "",
                                     Street: "",
                                     City: " ",
                                     State: "",
-                                    ZipCode: "",
-                                    Gender: "Male",
-                                    DayOfBirth: "",
-                                    Role: "Architect",
-                                    NationalEngineeringId: "",
-                                    Bio: "",
-                                    Type: "",
-                                    NbExperienceYears: "",
+                                    ZipCode: ""
                                 }}
                                                        submitted={submitted}
                                                        completed={completed}
                                                        success={success}
                                                        error={error}
                                                        onSubmit={async (values) => {
-                                                            await setSubmitted(true);
-                                                            setTimeout(async () => {
-                                                                console.log("-> values", values);
-                                                                setSubmitted(false);
-                                                                setCompleted(true);
+                                                           await setSubmitted(true);
+                                                           setTimeout(async () => {
+                                                               console.log("-> values", values);
+                                                               setSubmitted(false);
+                                                               setCompleted(true);
 
-                                                                const [res, err] = await queryServerApi("architects/Add", values, "POST", true);
-                                                                console.log(err);
-                                                                console.log('res = ', res);
-                                                                if (res === "UserNameExist") {
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: "Username already exist",
-                                                                        UserNameErr: true
-                                                                    });
-                                                                } else if (res === "CinExist") {
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: "Cin  already exist",
-                                                                        CinErr: true
-                                                                    });
-                                                                } else if (res === "EmailExist") {
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: "This email address is already registered. If it belongs to you, \n" +
-                                                                            "log in above or visit our account recovery page to get access to this account.",
-                                                                        EmailExist: true
-                                                                    });
-                                                                } else if (err) {
-                                                                    console.log('error', err)
-                                                                    setError({
-                                                                        visible: true,
-                                                                        message: JSON.stringify(err.errors, null, 2),
-                                                                    });
-                                                                } else {
-                                                                    notify("tr");
-                                                                    setSuccess(true);
-                                                                    setError({visible: false});
-                                                                    setTimeout(async () => {
-                                                                        history.push(`/Pricing?id=${res}`);
-                                                                        history.go(0);
-                                                                    }, 10000);
-                                                                }
-                                                            }, 3000);
-                                                        }}
+                                                               const [res, err] = await queryServerApi("promoters/", values, "POST", true);
+                                                               console.log(err);
+                                                               console.log('res = ', res);
+                                                               if (res === "DenominationExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Denomination already exist",
+                                                                       UserNameErr: true
+                                                                   });
+                                                               } else if (res === "UserNameExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Username already exist",
+                                                                       UserNameErr: true
+                                                                   });
+                                                               } else if (res === "CinExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "Cin  already exist",
+                                                                       CinErr: true
+                                                                   });
+                                                               } else if (res === "EmailExist") {
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: "This email address is already registered. If it belongs to you, \n" +
+                                                                           "log in above or visit our account recovery page to get access to this account.",
+                                                                       EmailExist: true
+                                                                   });
+                                                               } else if (err) {
+                                                                   console.log('error', err)
+                                                                   setError({
+                                                                       visible: true,
+                                                                       message: JSON.stringify(err.errors, null, 2),
+                                                                   });
+                                                               } else {
+                                                                   notify("tr");
+                                                                   setSuccess(true);
+                                                                   setError({visible: false});
+                                                                   setTimeout(async () => {
+                                                                       history.push(`/Pricing?id=${res}`);
+                                                                       history.go(0);
+                                                                   }, 10000);
+                                                               }
+                                                           }, 3000);
+                                                       }}
                                 >
                                     {/* First Step */}
                                     <FormikStep label="About" validationSchema={YupSchemaStep1}>
@@ -318,7 +256,8 @@ export default function SignUpArchitectFrom(props) {
                                             <Grid container spacing={2}>
                                                 <Grid item xs={5}>
                                                     <div className="fileinput text-center">
-                                                        <div className={"thumbnail img-circle"} style={{backgroundColor: "black"}}>
+                                                        <div className={"thumbnail img-circle"}
+                                                             style={{backgroundColor: "black"}}>
                                                             <img src={imagePreviewUrl} alt="..."/>
                                                         </div>
                                                     </div>
@@ -337,40 +276,43 @@ export default function SignUpArchitectFrom(props) {
                                                     <br/>
                                                     <br/>
                                                     <br/>
-                                                    <Field fullWidth type="Number" name="Cin" component={TextField}
-                                                           label="CIN"/>
+                                                    <Field fullWidth type="Number" name="ResponsibleCin"
+                                                           component={TextField}
+                                                           label="Responsible CIN"/>
                                                 </Grid>
                                                 <Grid item xs={10}>
 
-                                                    <Field fullWidth type="text" name="FirstName" component={TextField}
-                                                           label="First Name"/>
+                                                    <Field fullWidth type="text" name="ResponsibleName"
+                                                           component={TextField}
+                                                           label="Responsible Name"/>
                                                 </Grid>
                                                 <Grid item xs={10}>
 
-                                                    <Field fullWidth type="text" name="LastName" component={TextField}
-                                                           label="Last Name"/>
+                                                    <Field fullWidth type="text" name="CommercialName"
+                                                           component={TextField}
+                                                           label="Commercial Name"/>
                                                 </Grid>
                                                 <Grid item xs={6}>
 
-                                                    <Field type="Date" name="DayOfBirth" component={TextField}
-                                                           label="Day Of Birth"
+                                                    <Field type="Date" name="CreationYear" component={TextField}
+                                                           label="Creation Year"
                                                            InputLabelProps={{
                                                                shrink: true,
                                                            }}/>
                                                 </Grid>
                                                 <Grid item xs={6}>
 
-                                                    <Field component={RadioGroup} name="Gender">
+                                                    <Field component={RadioGroup} name="Activity">
                                                         <FormControlLabel
                                                             defaultChecked
-                                                            value="Male"
+                                                            value="Deactivated"
                                                             control={<Radio/>}
-                                                            label="Male"
+                                                            label="Deactivated"
                                                         />
                                                         <FormControlLabel
-                                                            value="Female"
+                                                            value="Activated"
                                                             control={<Radio/>}
-                                                            label="Female"
+                                                            label="Activated"
                                                         />
                                                     </Field>
                                                 </Grid>
@@ -384,8 +326,8 @@ export default function SignUpArchitectFrom(props) {
                                     {/* Second Step */}
                                     <FormikStep label="Account & Security" validationSchema={YupSchemaStep2}>
                                         <Box paddingBottom={2}>
-                                            <Field fullWidth type="text" name="Username" component={TextField}
-                                                   label="Username"
+                                            <Field fullWidth type="text" name="Denomination" component={TextField}
+                                                   label="Denomination"
                                                    InputProps={{
                                                        startAdornment: (
                                                            <InputAdornment position="start">
@@ -420,43 +362,34 @@ export default function SignUpArchitectFrom(props) {
                                     </FormikStep>
 
 
-                                    <FormikStep label="Architect Details" validationSchema={YupSchemaStep3}>
+                                    <FormikStep label="Promoter Details" validationSchema={YupSchemaStep3}>
                                         <Grid container spacing={4}>
 
-                                            <Grid item xs={5}>
-                                                <Field
-                                                    name="cv"
-                                                    label=""
-                                                    component={CustomFileUploadPdf}
-                                                />
-                                            </Grid>
-
-
                                             <Grid item xs={7}>
-                                                <Field fullWidth type="Number" name="NationalEngineeringId"
+                                                <Field fullWidth type="text" name="RegisterStatus"
                                                        component={TextField}
-                                                       label="National Engineering Id"/>
+                                                       label="RegisterStatus"/>
                                             </Grid>
 
 
                                             <Grid item xs={6}>
                                                 <br/>
                                                 <br/>
-                                                <Field fullWidth type="Number" name="NbExperienceYears"
+                                                <Field fullWidth type="text" name="RegionalOffice"
                                                        component={TextField}
-                                                       label="Nb Experience Years"/>
+                                                       label="Regional Office"/>
                                             </Grid>
 
                                             <Grid item xs={7}>
                                                 <InputLabel
-                                                    id="demo-simple-select-placeholder-label-label">Type</InputLabel>
+                                                    id="demo-simple-select-placeholder-label-label">TaxSituation</InputLabel>
                                                 <Field
                                                     labelId="demo-simple-select-placeholder-label-label"
                                                     id="demo-simple-select-placeholder-label"
                                                     fullWidth
                                                     displayEmpty
                                                     component={Select}
-                                                    name="Type"
+                                                    name="TaxSituation"
                                                     inputProps={{
                                                         id: 'age-simple',
                                                     }}
@@ -469,16 +402,6 @@ export default function SignUpArchitectFrom(props) {
                                                     <MenuItem value="Paysagiste">Paysagiste</MenuItem>
                                                     <MenuItem value="Extérieur">Extérieur</MenuItem>
                                                 </Field>
-                                            </Grid>
-
-                                            <Grid item xs={6}>
-
-                                                <Field fullWidth name="Bio" component={TextField}
-                                                       id="Bio"
-                                                       label="Bio"
-                                                       multiline
-                                                       rows={4}
-                                                       variant="filled"/>
                                             </Grid>
 
                                         </Grid>
@@ -537,14 +460,14 @@ export default function SignUpArchitectFrom(props) {
 
 
 const YupSchemaStep1 = Yup.object({
-    Cin: Yup.number("CIN should be a number")
-        .positive("the CIN Number should be positive")
-        .required("CIN is required"),
-    FirstName: Yup.string()
-        .required("First Name is Required"),
-    LastName: Yup.string()
-        .required("Last Name is Required"),
-    DayOfBirth: Yup.date()
+    ResponsibleCin: Yup.number("ResponsibleCin should be a number")
+        .positive("ResponsibleCin should be Positive")
+        .required("ResponsibleCin is Required"),
+    ResponsibleName: Yup.string()
+        .required("Responsible eName is required"),
+    CommercialName: Yup.string()
+        .required("Commercial Name is required"),
+    CreationYear: Yup.date()
         .required("Creation Date is required")
         .max(new Date(), "you can't choose a future date"),
 });
@@ -552,8 +475,8 @@ const YupSchemaStep1 = Yup.object({
 
 const YupSchemaStep2 = Yup.object(
     {
-        Username: Yup.string()
-            .required("Username is Required"),
+        Denomination: Yup.string()
+            .required("Denomination is Required"),
         Email: Yup.string()
             .email("No valid Email ")
             .required("email is Required"),
@@ -571,11 +494,8 @@ const YupSchemaStep2 = Yup.object(
 
 const YupSchemaStep3 = Yup.object(
     {
-        NationalEngineeringId: Yup.number("National Engineering Id should be a number")
-            .positive("the National Engineering Id Number should be positive")
-            .required("National Engineering Id is required"),
-        NbExperienceYears: Yup.number("Nb Experience Years Code should be a number")
-            .positive("Nb Experience Years Code should be Positive"),
+        RegionalOffice: Yup.string()
+            .required("Regional Office is required"),
     }
 );
 const YupSchemaStep4 = Yup.object(
