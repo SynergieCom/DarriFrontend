@@ -14,6 +14,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {UncontrolledAlert} from "reactstrap";
 import ErrorIcon from '@material-ui/icons/Error';
 import {Alert} from "@material-ui/lab";
+import RegisterSocialCustomer from "./RegisterSocialCustomer";
 
 
 export function FormikStepperCustomer({children, ...props}: FormikConfig<FormikValues>) {
@@ -136,6 +137,8 @@ export function FormikStepperCustomer({children, ...props}: FormikConfig<FormikV
             marginBottom: theme.spacing(1),
         },
     }));
+
+
 
     return (
         <Formik {...props}

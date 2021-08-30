@@ -16,7 +16,7 @@ import {useServerApi} from "../../hooks/useServerApi";
 
 function UserProfile() {
     const id = localStorage.getItem('id');
-    const  [user, err, reload] = useServerApi(`users/${id}`);
+    const [user, err, reload] = useServerApi(`users/${id}`);
     const toRender = user;
 
     useEffect(() => {

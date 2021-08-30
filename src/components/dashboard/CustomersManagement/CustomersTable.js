@@ -2,39 +2,99 @@ import React, {useState} from 'react';
 import {Button, Card, CardBody, CardHeader, CardTitle, Col, Modal, Row, Table, UncontrolledTooltip} from "reactstrap";
 import {queryServerApi} from "../../../utils/queryServerApi";
 import {useHistory} from "react-router";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
-function UsersTable(props) {
+export default function CustomersTable(props) {
+
     const role = localStorage.getItem('role');
     const history = useHistory();
-    const [user, setUser] = useState({});
-    const [modalNotice, setModalNotice] = React.useState(false);
-    const toggleModalNotice = async (id) => {
-        const [res, err] = await queryServerApi("users/" + id);
-        setUser(res);
-        setModalNotice(!modalNotice);
+    const [alert, setAlert] = React.useState(null);
+    const [Deleted, setDeleted] = useState(false);
+
+    const hideAlert = () => {
+        if (Deleted) {
+            setAlert(null);
+            history.push("/admin/customers");
+            history.go(0);
+        } else {
+            setAlert(null);
+        }
+
+
     };
-    const toggleModalNotice1 = () => {
-        setModalNotice(!modalNotice);
+
+    const cancelDetele = () => {
+        setAlert(
+            <ReactBSAlert
+                danger
+                style={{display: "block", marginTop: "-100px"}}
+                title="Cancelled"
+                onConfirm={() => hideAlert(Deleted)}
+                onCancel={() => hideAlert(Deleted)}
+                confirmBtnBsStyle="info"
+                btnSize=""
+            >
+                The Customer Data is safe
+            </ReactBSAlert>
+        );
+    };
+
+
+    const warningWithConfirmAndCancelMessage = (id) => {
+        setAlert(
+            <ReactBSAlert
+                warning
+                style={{display: "block", marginTop: "-100px"}}
+                title="Are you sure?"
+                onConfirm={() => successDelete(id)}
+                onCancel={() => cancelDetele()}
+                confirmBtnBsStyle="info"
+                cancelBtnBsStyle="danger"
+                confirmBtnText="Yes, delete it!"
+                cancelBtnText="Cancel"
+                showCancel
+                btnSize=""
+            >
+                You will not be able to recover this customer!
+            </ReactBSAlert>
+        );
     }
-    const DisableAccount = async (id) => {
-        const [err] = await queryServerApi("users/remove/" + id, {}, "DELETE");
+    const successDelete = async (id) => {
+        const [err] = await queryServerApi("customers/remove/" + id, {}, "DELETE");
         if (err) {
             console.log(err);
         }
-        history.push("/admin/users");
-        history.go(0);
+        setDeleted(true);
+        setAlert(
+            <ReactBSAlert
+                success
+                style={{display: "block", marginTop: "-100px"}}
+                title="Deleted!"
+                onConfirm={() => hideAlert()}
+                onCancel={() => hideAlert()}
+                confirmBtnBsStyle="info"
+                btnSize=""
+            >
+                Your Customer file has been deleted.
+            </ReactBSAlert>
+        );
     };
 
+    const CustomerDetails = (id) => {
+        history.push("/admin/customer/" + id)
+    }
+
     const editUser = (id) => {
-        history.push("/admin/updateUser/" + id);
+        history.push("/admin/updateCustomer/" + id);
     }
 
     return (
         <>
+            {alert}
             <Col md="12">
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Active Users</CardTitle>
+                        <CardTitle tag="h4">Customers</CardTitle>
                     </CardHeader>
                     <CardBody>
                         <Table responsive>
@@ -44,7 +104,7 @@ function UsersTable(props) {
                                 <th>Username</th>
                                 <th>Role</th>
                                 <th className="text-center">Since</th>
-                                <th className="text-right">Email</th>
+                                <th className="text-right">Salary</th>
                                 <th className="text-right">Actions</th>
                             </tr>
                             </thead>
@@ -69,7 +129,7 @@ function UsersTable(props) {
                                     <td className="text-right">{user.Email}</td>
                                     <td className="text-right">
 
-                                        {(role === "Admin" && (user.Role === "Admin" || user.Role === "Editor")) ? (
+                                        {(role === "Admin") ? (
                                             <>
                                                 <Button
                                                     className="btn-icon"
@@ -77,7 +137,7 @@ function UsersTable(props) {
                                                     id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => toggleModalNotice(user._id)}
+                                                    onClick={() => CustomerDetails(user._id)}
                                                 >
                                                     <i className="fa fa-user"/>
                                                 </Button>{" "}
@@ -110,7 +170,7 @@ function UsersTable(props) {
                                                     id="tooltip476609793"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => DisableAccount(user._id)}
+                                                    onClick={() => warningWithConfirmAndCancelMessage(user._id)}
                                                 >
                                                     <i className="fa fa-times"/>
                                                 </Button>{" "}
@@ -118,11 +178,11 @@ function UsersTable(props) {
                                                     delay={0}
                                                     target="tooltip476609793"
                                                 >
-                                                    Delete Account
+                                                    Delete Customer
                                                 </UncontrolledTooltip>
                                             </>
 
-                                        ) : (role === "Editor" && (user.Role === "Admin" || user.Role === "Editor")) ? (
+                                        ) : (role === "Editor") && (
                                             <>
                                                 <Button
                                                     className="btn-icon"
@@ -130,7 +190,7 @@ function UsersTable(props) {
                                                     id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => toggleModalNotice(user._id)}
+                                                    onClick={() => CustomerDetails(user._id)}
                                                 >
                                                     <i className="fa fa-user"/>
                                                 </Button>{" "}
@@ -158,48 +218,6 @@ function UsersTable(props) {
                                                     Edit
                                                 </UncontrolledTooltip>
                                             </>
-                                        ) : (user.Role !== "Admin" && user.Role !== "Editor") && (
-                                            <>
-                                                <>
-                                                    <Button
-                                                        className="btn-icon"
-                                                        color="info"
-                                                        id="tooltip264453216"
-                                                        size="sm"
-                                                        type="button"
-                                                        onClick={() => toggleModalNotice(user._id)}
-                                                    >
-                                                        <i className="fa fa-user"/>
-                                                    </Button>{" "}
-                                                    <UncontrolledTooltip
-                                                        delay={0}
-                                                        target="tooltip264453216"
-                                                    >
-                                                        Show User Details
-                                                    </UncontrolledTooltip>
-                                                    {role === "Admin" && (
-                                                        <>
-                                                            <Button
-                                                                className="btn-icon"
-                                                                color="danger"
-                                                                id="tooltip476609793"
-                                                                size="sm"
-                                                                type="button"
-                                                                onClick={() => DisableAccount(user._id)}
-                                                            >
-                                                                <i className="fa fa-times"/>
-                                                            </Button>{" "}
-                                                            <UncontrolledTooltip
-                                                                delay={0}
-                                                                target="tooltip476609793"
-                                                            >
-                                                                Disable Account
-                                                            </UncontrolledTooltip>
-                                                        </>
-                                                    )}
-
-                                                </>
-                                            </>
                                         )}
                                     </td>
                                 </tr>
@@ -211,68 +229,7 @@ function UsersTable(props) {
                     </CardBody>
                 </Card>
             </Col>
-            <Modal isOpen={modalNotice} toggle={toggleModalNotice1}>
-                <div className="modal-header">
-                    <button
-                        aria-hidden={true}
-                        className="close"
-                        data-dismiss="modal"
-                        type="button"
-                        onClick={toggleModalNotice1}
-                    >
-                        <i className="nc-icon nc-simple-remove"/>
-                    </button>
-                    <h5 className="modal-title" id="myModalLabel">
-                        User Details
-                    </h5>
-                </div>
-                <div className="modal-body">
-                    <div className="instruction">
-                        <Row>
-                            <Col md="8">
-                                <strong>{user.Username}</strong>
-                                <p className="description">
-                                    {user.FirstName} {user.LastName}
-                                    <br/>
-                                    <a>
-                                        {user.Role}
-                                    </a>
-                                    <br/>
-                                    {user.Email}
-                                </p>
-                            </Col>
-                            <Col md="4">
-                                <div className="picture">
-                                    <img
-                                        alt="..."
-                                        className="rounded img-raised"
-                                        src={process.env.REACT_APP_API_URL_UPLOADS + "/" + user.img}
-                                    />
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                    <p>
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        {user.FirstName} {user.LastName} is an {user.Role} in our platform
-                        you can contact him/her via his Email {user.Email} or his Phone Number {user.PhoneNumber}
-                    </p>
-                </div>
-                <div className="modal-footer justify-content-center">
-                    <Button
-                        className="btn-round"
-                        color="info"
-                        data-dismiss="modal"
-                        type="button"
-                        onClick={toggleModalNotice1}
-                    >
-                        Close
-                    </Button>
-                </div>
-            </Modal>
-
         </>
     );
 }
 
-export default UsersTable;

@@ -6,7 +6,7 @@ const Loader = () => {
     <>
      <div id="pt-loading">
          <div id="pt-loading-center">
-            <img src="images/loder.gif" alt="loading"/>
+            <img src="images/LOGO2.png" alt="loading"/>
          </div>
       </div>
       </>

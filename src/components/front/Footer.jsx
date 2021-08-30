@@ -14,7 +14,7 @@ const Footer = () => {
                         <div className="footer-logo">
                            <div className="row">
                               <div className="col-sm-12">
-                                 <img className="img-fluid pt-footer-logo" src="images/logo-white.png" alt="logo-white"/>
+                                 <img className="img-fluid" src="images/LOGO1.png" alt="logo-white"/>
                                  <p className="text-white">Lorem Ipsum is simply dummied text of the printing and typesetting
                                     industry.
                                  </p>

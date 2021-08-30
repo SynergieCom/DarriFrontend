@@ -22,10 +22,9 @@ const NavBarHome = () => {
 
             <header id="pt-header" className="pt-header-style-2 pt-has-sticky">
                 <div className="row no-gutters">
-                    <div className="col-lg-2 col-md-4">
-                        <a className="navbar-brand" href="/#">
-                            <h2 style={{color:"white"}}>DARRI</h2>
-                            {/*<img className="img-fluid logo" src="images/logo-white.png" alt="architeck"/> */}
+                    <div className="col-lg-2 col-md-1" style={{backgroundColor:"#ff5e14",height:139}}>
+                        <a href="/">
+                            <img className="img-fluid logo" src="images/LOGO2.png"  alt="architeck"/>
                         </a>
                     </div>
                     <div className="col-lg-10 col-md-8">

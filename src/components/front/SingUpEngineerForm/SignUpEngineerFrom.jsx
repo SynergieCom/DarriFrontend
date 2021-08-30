@@ -3,7 +3,7 @@ import {Field,} from "formik";
 import * as Yup from "yup";
 import {RadioGroup, TextField} from "formik-material-ui";
 import {
-    Box, Button,
+    Box,
     FormControl,
     FormControlLabel, FormHelperText,
     Grid,
@@ -24,6 +24,9 @@ import {FormikStepperEngineer} from "./FormikStepperEngineer";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import {Select} from 'formik-material-ui';
 import {useHistory} from "react-router";
+import {Button, Col} from "reactstrap";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 
 export default function SignUpEngineerForm(props) {
     const history = useHistory();
@@ -221,6 +224,75 @@ export default function SignUpEngineerForm(props) {
     };
 
 
+    const notifyGoogle = (place, email, name) => {
+        var color = 2;
+        var type = "danger";
+        var options = {};
+        options = {
+            place: place,
+            message: (
+                <div>
+                    <div>
+                        Great ! your registry is almost done successfully with your google
+                        account {email} , <strong> {name} Please complete the missing fields to finish your
+                        registration </strong>
+                    </div>
+                </div>
+            ),
+            type: type,
+            icon: "now-ui-icons ui-1_bell-53",
+            autoDismiss: 10,
+        };
+        notificationAlert.current.notificationAlert(options);
+    };
+    const notifyFacebook = (place, email, name) => {
+        var color = 2;
+        var type = "info";
+        var options = {};
+        options = {
+            place: place,
+            message: (
+                <div>
+                    <div>
+                        Great ! your registry is almost done successfully with your facebook
+                        account {email} , <strong> {name} Please complete the missing fields to finish your
+                        registration </strong>
+                    </div>
+                </div>
+            ),
+            type: type,
+            icon: "now-ui-icons ui-1_bell-53",
+            autoDismiss: 10,
+        };
+        notificationAlert.current.notificationAlert(options);
+    };
+
+    const [Username, setUsername] = useState("");
+    const [FirsName, setFirsName] = useState("");
+    const [LastName, setLastName] = useState("");
+    const [Email, setEmail] = useState("");
+    const responseGoogle = (response) => {
+        console.log(response);
+        setUsername(response.profileObj.name);
+        setFirsName(response.profileObj.familyName);
+        setLastName(response.profileObj.givenName);
+        setEmail(response.profileObj.email);
+        notifyGoogle("tr", response.profileObj.email, response.profileObj.name);
+    }
+
+    const responseErrorGoogle = (response) => {
+
+    }
+
+    const responseFacebook = (response) => {
+        console.log(response);
+        setUsername(response.name);
+        setEmail(response.email);
+        notifyFacebook("tr", response.email, response.name);
+
+    }
+
+
     return (
         <>
             <NotificationAlert ref={notificationAlert}/>
@@ -235,18 +307,67 @@ export default function SignUpEngineerForm(props) {
                                 <div className="pt-bg-overley pt-opacity1 "
                                      style={{backgroundImage: "url('images/Archi1.jpg')", backgroundColor: "red"}}>
                                 </div>
-                                <div className="pt-section-title-box">
-                                    <span className="pt-section-sub-title">Sign Up</span>
-                                    <h2 className="pt-section-title">Sign Up as Engineer</h2>
-                                </div>
+
+                                <Grid container spacing={4}>
+                                    <Grid item xs={7}>
+                                        <div className="pt-section-title-box">
+                                            <span className="pt-section-sub-title">Sign Up</span>
+                                            <h2 className="pt-section-title">Sign Up as Engineer</h2>
+                                        </div>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                    </Grid>
+                                    <Grid>
+                                        <Button className="btn-icon btn-round" color="facebook">
+                                            <FacebookLogin
+                                                size="Small"
+                                                appId="430902411432071"
+                                                autoLoad={false}
+                                                fields="name,email,picture"
+                                                cssClass="btnFacebook"
+                                                icon="fa fa-facebook-f"
+                                                textButton=""
+                                                callback={responseFacebook}
+                                            />
+                                        </Button>
+                                    </Grid>
+                                    <Grid>
+                                        <GoogleLogin
+                                            clientId="211469900619-2p5n681boi9123tb9tqohej9b5186mr6.apps.googleusercontent.com"
+                                            render={renderProps => (
+                                                <Button
+                                                    className="btn-icon btn-round"
+                                                    color="google"
+                                                    onClick={renderProps.onClick}
+                                                    disabled={renderProps.disabled}
+                                                >
+                                                    <i className="fa fa-google"/>
+                                                </Button>
+                                            )}
+                                            onSuccess={responseGoogle}
+                                            onFailure={responseErrorGoogle}
+                                        />
+                                    </Grid>
+                                    <Grid>
+                                        <Button className="btn-icon btn-round" color="linkedin">
+                                            <i className="fa fa-linkedin"/>
+                                        </Button>
+                                    </Grid>
+                                    <Grid>
+                                        <Button className="btn-icon btn-round" color="github">
+                                            <i className="fa fa-github"/>
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+
                                 <FormikStepperEngineer initialValues={{
-                                    Username: "",
+                                    Username: Username,
                                     Cin: "",
-                                    FirstName: "",
-                                    LastName: "",
+                                    FirstName: FirsName,
+                                    LastName: LastName,
                                     Password: "",
                                     PasswordConfirmation: "",
-                                    Email: "",
+                                    Email: Email,
                                     PhoneNumber: "",
                                     Street: "",
                                     City: " ",
@@ -260,6 +381,7 @@ export default function SignUpEngineerForm(props) {
                                     Speciality: "",
                                     NbExperienceYears: "",
                                 }}
+                                                       enableReinitialize
                                                        submitted={submitted}
                                                        completed={completed}
                                                        success={success}
