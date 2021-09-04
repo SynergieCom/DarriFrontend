@@ -3,7 +3,7 @@ import {Field,} from "formik";
 import * as Yup from "yup";
 import {RadioGroup, TextField} from "formik-material-ui";
 import {
-    Box,
+    Box,Button as Button2,
     FormControl,
     FormControlLabel, FormHelperText,
     Grid,
@@ -174,7 +174,7 @@ export default function SignUpArchitectFrom(props) {
 
             />
             <label htmlFor="icon-button-file">
-                <Button
+                <Button2
                     component="span"
                     variant="contained"
                     color="secondary"
@@ -182,7 +182,7 @@ export default function SignUpArchitectFrom(props) {
                     startIcon={<PictureAsPdfIcon/>}
                 >
                     Upload Your CV
-                </Button>
+                </Button2>
             </label>
             {props.form.error && (
                 <FormHelperText error>{props.form.error}</FormHelperText>
@@ -639,7 +639,7 @@ export default function SignUpArchitectFrom(props) {
                                         </Box>
                                         <Box paddingBottom={2}>
 
-                                            <Field fullWidth type="text" name="ZipCode" component={TextField}
+                                            <Field fullWidth type="number" name="ZipCode" component={TextField}
                                                    label="ZipCode"
                                                    variant="outlined" InputLabelProps={{
                                                 shrink: true,

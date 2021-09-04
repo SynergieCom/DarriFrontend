@@ -11,6 +11,9 @@ import Engineers from "./pages/dashboard/Engineers";
 import CustomerDetails from "./pages/dashboard/CustomerDetails";
 import EditCustomerPage from "./pages/dashboard/EditCustomerPage";
 import EditCustomerForm from "./components/dashboard/CustomersManagement/EditCustomerForm";
+import ArchitectDetails from "./pages/dashboard/ArchitectDetails";
+import EditArchitectForm from "./components/dashboard/ArchitectsManagement/EditArchitectrForm";
+import EditArchitectPage from "./pages/dashboard/EditArchitectPage";
 
 
 const routes = [
@@ -106,7 +109,17 @@ const routes = [
                 path: "/customer/:id",
                 component: CustomerDetails,
                 layout: "/admin",
-            }
+            },
+            {
+                path: "/architect/:id",
+                component: ArchitectDetails,
+                layout: "/admin",
+            },
+            {
+                path: "/updateArchitect/:id",
+                component: EditArchitectPage,
+                layout: "/admin",
+            },
         ],
     },
 
