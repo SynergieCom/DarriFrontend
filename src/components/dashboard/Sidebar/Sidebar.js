@@ -42,7 +42,6 @@ function Sidebar(props) {
     }
 
 
-
     // this creates the intial state of this component based on the collapse routes
     // that it gets through props.routes
     const getCollapseStates = (routes) => {
@@ -188,7 +187,7 @@ function Sidebar(props) {
             <div className="sidebar-wrapper" ref={sidebar}>
                 <div className="user">
                     <div className="photo">
-                        <img src={process.env.REACT_APP_API_URL_UPLOADS +"/"+ img } alt="Avatar"/>
+                        <img src={process.env.REACT_APP_API_URL_UPLOADS + "/" + img} alt="Avatar"/>
                     </div>
                     <div className="info">
                         <a
@@ -217,7 +216,7 @@ function Sidebar(props) {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/admin/user-profile" activeClassName="">
+                                    <NavLink to="/" activeClassName="">
                                         <span className="sidebar-mini-icon">L</span>
                                         <span className="sidebar-normal" onClick={Logout}>Logout</span>
                                     </NavLink>

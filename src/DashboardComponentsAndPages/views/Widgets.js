@@ -313,7 +313,7 @@ function Widgets() {
                     <tr>
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Salary</th>
+                      <th>Email</th>
                       <th>Country</th>
                     </tr>
                   </thead>

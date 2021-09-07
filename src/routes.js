@@ -14,6 +14,10 @@ import EditCustomerForm from "./components/dashboard/CustomersManagement/EditCus
 import ArchitectDetails from "./pages/dashboard/ArchitectDetails";
 import EditArchitectForm from "./components/dashboard/ArchitectsManagement/EditArchitectrForm";
 import EditArchitectPage from "./pages/dashboard/EditArchitectPage";
+import EngineerDetails from "./pages/dashboard/EngineerDetails";
+import EditEngineerPage from "./pages/dashboard/EditEngineerPage";
+import PromoterDetails from "./pages/dashboard/PromoterDetails";
+import EditPromoterPage from "./pages/dashboard/EditPromoterPage";
 
 
 const routes = [
@@ -80,48 +84,68 @@ const routes = [
                 component: Engineers,
                 layout: "/admin",
             },
-            {
-                path: "/User/:id",
-                component: Users,
-                layout: "/admin",
-            },
-            {
-                path: "/userProfile",
-                component: UserProfile,
-                layout: "/admin",
-            },
-            {
-                path: "/updateUser/:id",
-                component: EditUser,
-                layout: "/admin",
-            },
-            {
-                path: "/updateCustomer/:id",
-                component: EditCustomerPage,
-                layout: "/admin",
-            },
-            {
-                path: "/settings",
-                component: Settings,
-                layout: "/admin",
-            },
-            {
-                path: "/customer/:id",
-                component: CustomerDetails,
-                layout: "/admin",
-            },
-            {
-                path: "/architect/:id",
-                component: ArchitectDetails,
-                layout: "/admin",
-            },
-            {
-                path: "/updateArchitect/:id",
-                component: EditArchitectPage,
-                layout: "/admin",
-            },
         ],
     },
+    {
+        path: "/User/:id",
+        component: Users,
+        layout: "/admin",
+    },
+    {
+        path: "/userProfile",
+        component: UserProfile,
+        layout: "/admin",
+    },
+    {
+        path: "/updateUser/:id",
+        component: EditUser,
+        layout: "/admin",
+    },
+    {
+        path: "/updateCustomer/:id",
+        component: EditCustomerPage,
+        layout: "/admin",
+    },
+    {
+        path: "/settings",
+        component: Settings,
+        layout: "/admin",
+    },
+    {
+        path: "/customer/:id",
+        component: CustomerDetails,
+        layout: "/admin",
+    },
+    {
+        path: "/architect/:id",
+        component: ArchitectDetails,
+        layout: "/admin",
+    },
+    {
+        path: "/updateArchitect/:id",
+        component: EditArchitectPage,
+        layout: "/admin",
+    },
+    {
+        path: "/engineer/:id",
+        component: EngineerDetails,
+        layout: "/admin",
+    },
+    {
+        path: "/updateEngineer/:id",
+        component: EditEngineerPage,
+        layout: "/admin",
+    } ,
+    {
+        path: "/promoter/:id",
+        component: PromoterDetails,
+        layout: "/admin",
+    },
+    {
+        path: "/updatePromoter/:id",
+        component: EditPromoterPage,
+        layout: "/admin",
+    }
 
 ];
 

@@ -4,7 +4,7 @@ import {queryServerApi} from "../../../utils/queryServerApi";
 import {useHistory} from "react-router";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-export default function ArchitectsTable(props) {
+export default function EngineersTable(props) {
 
     const role = localStorage.getItem('role');
     const history = useHistory();
@@ -14,7 +14,7 @@ export default function ArchitectsTable(props) {
     const hideAlert = () => {
         if (Deleted) {
             setAlert(null);
-            history.push("/admin/architects");
+            history.push("/admin/engineers");
             history.go(0);
         } else {
             setAlert(null);
@@ -34,7 +34,7 @@ export default function ArchitectsTable(props) {
                 confirmBtnBsStyle="info"
                 btnSize=""
             >
-                The Architect Data is safe
+                The Engineer Data is safe
             </ReactBSAlert>
         );
     };
@@ -55,12 +55,12 @@ export default function ArchitectsTable(props) {
                 showCancel
                 btnSize=""
             >
-                You will not be able to recover this Architect!
+                You will not be able to recover this Engineer!
             </ReactBSAlert>
         );
     }
     const successDelete = async (id) => {
-        const [err] = await queryServerApi("architects/remove/" + id, {}, "DELETE");
+        const [err] = await queryServerApi("engineers/remove/" + id, {}, "DELETE");
         if (err) {
             console.log(err);
         }
@@ -75,17 +75,17 @@ export default function ArchitectsTable(props) {
                 confirmBtnBsStyle="info"
                 btnSize=""
             >
-                Your Architect file has been deleted.
+                Your Engineer file has been deleted.
             </ReactBSAlert>
         );
     };
 
-    const ArchitectDetails = (id) => {
-        history.push("/admin/architect/" + id)
+    const EngineerDetails = (id) => {
+        history.push("/admin/engineer/" + id)
     }
 
     const editUser = (id) => {
-        history.push("/admin/updateArchitect/" + id);
+        history.push("/admin/updateEngineer/" + id);
     }
 
     return (
@@ -94,7 +94,7 @@ export default function ArchitectsTable(props) {
             <Col md="12">
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Architects</CardTitle>
+                        <CardTitle tag="h4">Engineers</CardTitle>
                     </CardHeader>
                     <CardBody>
                         <Table responsive>
@@ -137,7 +137,7 @@ export default function ArchitectsTable(props) {
                                                     id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => ArchitectDetails(user._id)}
+                                                    onClick={() => EngineerDetails(user._id)}
                                                 >
                                                     <i className="fa fa-user"/>
                                                 </Button>{" "}
@@ -178,7 +178,7 @@ export default function ArchitectsTable(props) {
                                                     delay={0}
                                                     target="tooltip476609793"
                                                 >
-                                                    Delete Architect
+                                                    Delete Engineer
                                                 </UncontrolledTooltip>
                                             </>
 
@@ -190,7 +190,7 @@ export default function ArchitectsTable(props) {
                                                     id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => ArchitectDetails(user._id)}
+                                                    onClick={() => EngineerDetails(user._id)}
                                                 >
                                                     <i className="fa fa-user"/>
                                                 </Button>{" "}

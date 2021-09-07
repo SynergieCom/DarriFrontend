@@ -44,7 +44,7 @@ function RegularTables() {
                       <th>Name</th>
                       <th>Country</th>
                       <th>City</th>
-                      <th className="text-right">Salary</th>
+                      <th className="text-right">Email</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -110,7 +110,7 @@ function RegularTables() {
                       <th>Name</th>
                       <th>Country</th>
                       <th>City</th>
-                      <th className="text-right">Salary</th>
+                      <th className="text-right">Email</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -173,7 +173,7 @@ function RegularTables() {
                       <th>Name</th>
                       <th>Country</th>
                       <th>City</th>
-                      <th className="text-right">Salary</th>
+                      <th className="text-right">Email</th>
                     </tr>
                   </thead>
                   <tbody>

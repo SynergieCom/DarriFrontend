@@ -7,8 +7,7 @@ import {useHistory} from "react-router";
 import defaultAvatar from "../../../assets/img/placeholder.jpg";
 import Select from "react-select";
 
-
-function EditArchitectForm(props) {
+export default function EditEngineerForm(props) {
     const history = useHistory();
     const [fileState, setFileState] = React.useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = React.useState("");
@@ -91,7 +90,7 @@ function EditArchitectForm(props) {
             "DayOfBirth": "",
             "NationalEngineeringId": "",
             "Bio": "",
-            "Type": "",
+            "Speciality": "",
             "NbExperienceYears": "",
         }, validationSchema: YupSchema,
         onSubmit: async (values) => {
@@ -109,7 +108,7 @@ function EditArchitectForm(props) {
 
     useEffect(() => {
         async function fetchDataForm() {
-            const [res, err] = await queryServerApi("architects/" + props.id);
+            const [res, err] = await queryServerApi("engineers/" + props.id);
             formik.setValues({
                 "Id": res?._id,
                 "Username": res.Username,
@@ -126,7 +125,7 @@ function EditArchitectForm(props) {
                 "DayOfBirth": res.DayOfBirth,
                 "NationalEngineeringId": res.NationalEngineeringId,
                 "Bio": res.Bio,
-                "Type": res.Type,
+                "Speciality": res.Speciality,
                 "NbExperienceYears": res.NbExperienceYears,
             })
             console.log("-> res", res);
@@ -427,6 +426,8 @@ function EditArchitectForm(props) {
                                 </Row>
 
 
+
+
                                 <br/>
 
 
@@ -435,16 +436,17 @@ function EditArchitectForm(props) {
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="Type"
-                                            value={formik.values.Type}
-                                            onChange={(value) => formik.setFieldValue("Type", value.value)}
+                                            name="Speciality"
+                                            value={formik.values.Speciality}
+                                            onChange={(value) => formik.setFieldValue("Speciality", value.value)}
                                             options={[
-                                                {value: "Batîment", label: "Batîment"},
-                                                {value: "Géométrique", label: "Géométrique"},
-                                                {value: "Climatique", label: "Climatique"},
+                                                { value: "Intérieur", label: "Intérieur" },
+                                                { value: "Urbaniste", label: "Urbaniste" },
+                                                { value: "Paysagiste", label: "Paysagiste" },
+                                                { value: "Extérieur", label: "Extérieur" },
 
                                             ]}
-                                            placeholder={formik.values.Type}
+                                            placeholder={formik.values.Speciality}
                                         />
                                     </Col>
                                     <br/>
@@ -549,4 +551,3 @@ const YupSchema = Yup.object({
     ZipCode: Yup.number("Zip Code should be a number")
         .positive("Zip Code should be Positive"),
 });
-export default EditArchitectForm;

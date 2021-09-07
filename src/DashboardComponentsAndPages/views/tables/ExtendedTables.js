@@ -51,7 +51,7 @@ function ExtendedTables() {
                       <th>Name</th>
                       <th>Job Position</th>
                       <th className="text-center">Since</th>
-                      <th className="text-right">Salary</th>
+                      <th className="text-right">Email</th>
                       <th className="text-right">Actions</th>
                     </tr>
                   </thead>

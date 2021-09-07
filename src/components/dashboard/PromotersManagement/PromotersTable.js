@@ -4,7 +4,7 @@ import {queryServerApi} from "../../../utils/queryServerApi";
 import {useHistory} from "react-router";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 
-export default function ArchitectsTable(props) {
+export default function PromotersTable(props) {
 
     const role = localStorage.getItem('role');
     const history = useHistory();
@@ -14,7 +14,7 @@ export default function ArchitectsTable(props) {
     const hideAlert = () => {
         if (Deleted) {
             setAlert(null);
-            history.push("/admin/architects");
+            history.push("/admin/promoters");
             history.go(0);
         } else {
             setAlert(null);
@@ -34,7 +34,7 @@ export default function ArchitectsTable(props) {
                 confirmBtnBsStyle="info"
                 btnSize=""
             >
-                The Architect Data is safe
+                The Promoter Data is safe
             </ReactBSAlert>
         );
     };
@@ -55,12 +55,12 @@ export default function ArchitectsTable(props) {
                 showCancel
                 btnSize=""
             >
-                You will not be able to recover this Architect!
+                You will not be able to recover this Promoter!
             </ReactBSAlert>
         );
     }
     const successDelete = async (id) => {
-        const [err] = await queryServerApi("architects/remove/" + id, {}, "DELETE");
+        const [err] = await queryServerApi("promoters/remove/" + id, {}, "DELETE");
         if (err) {
             console.log(err);
         }
@@ -75,17 +75,17 @@ export default function ArchitectsTable(props) {
                 confirmBtnBsStyle="info"
                 btnSize=""
             >
-                Your Architect file has been deleted.
+                Your Promoter file has been deleted.
             </ReactBSAlert>
         );
     };
 
-    const ArchitectDetails = (id) => {
-        history.push("/admin/architect/" + id)
+    const PromoterDetails = (id) => {
+        history.push("/admin/promoter/" + id)
     }
 
     const editUser = (id) => {
-        history.push("/admin/updateArchitect/" + id);
+        history.push("/admin/updatePromoter/" + id);
     }
 
     return (
@@ -94,15 +94,15 @@ export default function ArchitectsTable(props) {
             <Col md="12">
                 <Card>
                     <CardHeader>
-                        <CardTitle tag="h4">Architects</CardTitle>
+                        <CardTitle tag="h4">Promoters</CardTitle>
                     </CardHeader>
                     <CardBody>
                         <Table responsive>
                             <thead className="text-primary">
                             <tr>
                                 <th/>
-                                <th>Username</th>
-                                <th>Role</th>
+                                <th>Name</th>
+                                <th>Responsible Name</th>
                                 <th className="text-center">Since</th>
                                 <th className="text-right">Email</th>
                                 <th className="text-right">Actions</th>
@@ -123,8 +123,8 @@ export default function ArchitectsTable(props) {
                                             />
                                         </div>
                                     </td>
-                                    <td>{user.Username}</td>
-                                    <td>{user.Role}</td>
+                                    <td>{user.Denomination}</td>
+                                    <td>{user.ResponsibleName}</td>
                                     <td className="text-center">{new Date(user.ActiveDate).toDateString()}</td>
                                     <td className="text-right">{user.Email}</td>
                                     <td className="text-right">
@@ -137,7 +137,7 @@ export default function ArchitectsTable(props) {
                                                     id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => ArchitectDetails(user._id)}
+                                                    onClick={() => PromoterDetails(user._id)}
                                                 >
                                                     <i className="fa fa-user"/>
                                                 </Button>{" "}
@@ -178,7 +178,7 @@ export default function ArchitectsTable(props) {
                                                     delay={0}
                                                     target="tooltip476609793"
                                                 >
-                                                    Delete Architect
+                                                    Delete Promoter
                                                 </UncontrolledTooltip>
                                             </>
 
@@ -190,7 +190,7 @@ export default function ArchitectsTable(props) {
                                                     id="tooltip264453216"
                                                     size="sm"
                                                     type="button"
-                                                    onClick={() => ArchitectDetails(user._id)}
+                                                    onClick={() => PromoterDetails(user._id)}
                                                 >
                                                     <i className="fa fa-user"/>
                                                 </Button>{" "}

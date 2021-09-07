@@ -104,7 +104,7 @@ export default function CustomersTable(props) {
                                 <th>Username</th>
                                 <th>Role</th>
                                 <th className="text-center">Since</th>
-                                <th className="text-right">Salary</th>
+                                <th className="text-right">Email</th>
                                 <th className="text-right">Actions</th>
                             </tr>
                             </thead>

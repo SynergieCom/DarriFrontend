@@ -7,8 +7,7 @@ import {useHistory} from "react-router";
 import defaultAvatar from "../../../assets/img/placeholder.jpg";
 import Select from "react-select";
 
-
-function EditArchitectForm(props) {
+export default function EditPromoterForm(props) {
     const history = useHistory();
     const [fileState, setFileState] = React.useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = React.useState("");
@@ -74,34 +73,30 @@ function EditArchitectForm(props) {
 
     const formik = useFormik({
         initialValues: {
-            "Id": "",
-            "Username": "",
-            "Cin": "",
-            "FirstName": "",
-            "LastName": "",
-            "Password": "",
-            "PasswordConfirmation": "",
+            "ResponsibleCin": "",
+            "ResponsibleName": "",
+            "CreationYear": "",
+            "CommercialName": "",
+            "Activity": "",
+            "RegisterStatus": "",
+            "RegionalOffice": "",
+            "Denomination": "",
+            "TaxSituation": "",
             "Email": "",
             "PhoneNumber": "",
             "Street": "",
-            "City": " ",
+            "City": "",
             "State": "",
             "ZipCode": "",
-            "Gender": "",
-            "DayOfBirth": "",
-            "NationalEngineeringId": "",
-            "Bio": "",
-            "Type": "",
-            "NbExperienceYears": "",
         }, validationSchema: YupSchema,
         onSubmit: async (values) => {
             console.log("Values", values);
-            const [res, err] = await queryServerApi("architects/update/" + props.id, values, "PUT", true);
+            const [res, err] = await queryServerApi("promoters/update/" + props.id, values, "PUT", true);
             console.log(err);
             if (err) {
                 console.log('error', err);
             } else {
-                history.push("/admin/architects");
+                history.push("/admin/promoters");
             }
         }
     });
@@ -109,25 +104,23 @@ function EditArchitectForm(props) {
 
     useEffect(() => {
         async function fetchDataForm() {
-            const [res, err] = await queryServerApi("architects/" + props.id);
+            const [res, err] = await queryServerApi("promoters/" + props.id);
             formik.setValues({
-                "Id": res?._id,
-                "Username": res.Username,
-                "Cin": res.Cin,
-                "FirstName": res.FirstName,
-                "LastName": res.LastName,
+                "ResponsibleCin": res.ResponsibleCin,
+                "ResponsibleName": res.ResponsibleName,
+                "CreationYear": res.CreationYear,
+                "CommercialName": res.CommercialName,
+                "Activity": res.Activity,
+                "RegisterStatus": res.RegisterStatus,
+                "RegionalOffice": res.RegionalOffice,
+                "Denomination": res.Denomination,
+                "TaxSituation": res.TaxSituation,
                 "Email": res.Email,
                 "PhoneNumber": res.PhoneNumber,
-                "Street": res.Address.Street,
-                "City": res.Address.City,
-                "State": res.Address.State,
-                "ZipCode": res.Address.ZipCode,
-                "Gender": res.Gender,
-                "DayOfBirth": res.DayOfBirth,
-                "NationalEngineeringId": res.NationalEngineeringId,
-                "Bio": res.Bio,
-                "Type": res.Type,
-                "NbExperienceYears": res.NbExperienceYears,
+                "Street": res.HeadquartersAddress.Street,
+                "City": res.HeadquartersAddress.City,
+                "State": res.HeadquartersAddress.State,
+                "ZipCode": res.HeadquartersAddress.ZipCode,
             })
             console.log("-> res", res);
             if (res.img != null) {
@@ -189,34 +182,34 @@ function EditArchitectForm(props) {
                                 <Row>
                                     <Col className="pr-1" md="3">
                                         <FormGroup
-                                            className={formik.errors.Cin && formik.touched.Cin ? "has-danger" : "has-success"}>
-                                            <label>Cin</label>
+                                            className={formik.errors.ResponsibleCin && formik.touched.ResponsibleCin ? "has-danger" : "has-success"}>
+                                            <label>ResponsibleCin</label>
                                             <Input
-                                                name="Cin"
-                                                value={formik.values.Cin}
+                                                name="ResponsibleCin"
+                                                value={formik.values.ResponsibleCin}
                                                 type="number"
                                                 onChange={formik.handleChange}
                                             />
-                                            {(formik.errors.Cin || formik.touched.Cin) &&
+                                            {(formik.errors.ResponsibleCin || formik.touched.ResponsibleCin) &&
                                             <label className="error">
-                                                {formik.errors.Cin}
+                                                {formik.errors.ResponsibleCin}
                                             </label>
                                             }
                                         </FormGroup>
                                     </Col>
                                     <Col className="px-1" md="4">
                                         <FormGroup
-                                            className={formik.errors.Username && formik.touched.Username ? "has-danger" : "has-success"}>
-                                            <label>Username</label>
+                                            className={formik.errors.Username && formik.touched.ResponsibleName ? "has-danger" : "has-success"}>
+                                            <label>Responsible Name</label>
                                             <Input
-                                                name="Username"
-                                                value={formik.values.Username}
+                                                name="ResponsibleName"
+                                                value={formik.values.ResponsibleName}
                                                 type="text"
                                                 onChange={formik.handleChange}
                                             />
-                                            {(formik.errors.Username || formik.touched.Username) &&
+                                            {(formik.errors.ResponsibleName || formik.touched.ResponsibleName) &&
                                             <label className="error">
-                                                {formik.errors.Username}
+                                                {formik.errors.ResponsibleName}
                                             </label>
                                             }
                                         </FormGroup>
@@ -245,32 +238,32 @@ function EditArchitectForm(props) {
                                 <Row>
                                     <Col className="pr-1" md="6">
                                         <FormGroup
-                                            className={formik.errors.FirstName && formik.touched.FirstName ? "has-danger" : "has-success"}>
-                                            <label>First Name</label>
+                                            className={formik.errors.Denomination && formik.touched.Denomination ? "has-danger" : "has-success"}>
+                                            <label>Denomination</label>
                                             <Input
-                                                name="FirstName"
-                                                value={formik.values.FirstName}
+                                                name="Denomination"
+                                                value={formik.values.Denomination}
                                                 type="text"
                                                 onChange={formik.handleChange}
                                             />
-                                            {(formik.errors.FirstName || formik.touched.FirstName) &&
+                                            {(formik.errors.Denomination || formik.touched.Denomination) &&
                                             <label className="error">
-                                                {formik.errors.FirstName}
+                                                {formik.errors.Denomination}
                                             </label>
                                             }
                                         </FormGroup>
                                     </Col>
                                     <Col className="pl-1" md="6">
                                         <FormGroup
-                                            className={formik.errors.LastName && formik.touched.LastName ? "has-danger" : "has-success"}>
-                                            <label>Last Name</label>
+                                            className={formik.errors.CommercialName && formik.touched.CommercialName ? "has-danger" : "has-success"}>
+                                            <label>Commercia Name</label>
                                             <Input
-                                                name="LastName"
-                                                value={formik.values.LastName}
+                                                name="CommercialName"
+                                                value={formik.values.CommercialName}
                                                 type="text"
                                                 onChange={formik.handleChange}
                                             />
-                                            {(formik.errors.LastName || formik.touched.LastName) &&
+                                            {(formik.errors.CommercialName || formik.touched.CommercialName) &&
                                             <label className="error">
                                                 {formik.errors.LastName}
                                             </label>
@@ -281,17 +274,17 @@ function EditArchitectForm(props) {
                                 <Row>
                                     <Col className="pr-1" md="6">
                                         <FormGroup
-                                            className={formik.errors.DayOfBirth && formik.touched.DayOfBirth ? "has-danger" : "has-success"}>
-                                            <label>DayOfBirth</label>
+                                            className={formik.errors.CreationYear && formik.touched.CreationYear ? "has-danger" : "has-success"}>
+                                            <label>CreationYear</label>
                                             <Input
-                                                name="DayOfBirth"
-                                                value={formik.values.DayOfBirth}
+                                                name="CreationYear"
+                                                value={formik.values.CreationYear}
                                                 type="date"
                                                 onChange={formik.handleChange}
                                             />
-                                            {(formik.errors.DayOfBirth || formik.touched.DayOfBirth) &&
+                                            {(formik.errors.CreationYear || formik.touched.CreationYear) &&
                                             <label className="error">
-                                                {formik.errors.DayOfBirth}
+                                                {formik.errors.CreationYear}
                                             </label>
                                             }
                                         </FormGroup>
@@ -311,61 +304,6 @@ function EditArchitectForm(props) {
                                             {(formik.errors.PhoneNumber || formik.touched.PhoneNumber) &&
                                             <label className="error">
                                                 {formik.errors.PhoneNumber}
-                                            </label>
-                                            }
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
-
-
-                                <Row>
-                                    <Col className="pr-1" md="3">
-                                        <FormGroup
-                                            className={formik.errors.NationalEngineeringId && formik.touched.NationalEngineeringId ? "has-danger" : "has-success"}>
-                                            <label> National Engineering Id</label>
-                                            <Input
-                                                name="NationalEngineeringId"
-                                                value={formik.values.NationalEngineeringId}
-                                                type="number"
-                                                onChange={formik.handleChange}
-                                            />
-                                            {(formik.errors.NationalEngineeringId || formik.touched.NationalEngineeringId) &&
-                                            <label className="error">
-                                                {formik.errors.NationalEngineeringId}
-                                            </label>
-                                            }
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="px-1" md="4">
-                                        <FormGroup
-                                            className={formik.errors.NbExperienceYears && formik.touched.NbExperienceYears ? "has-danger" : "has-success"}>
-                                            <label>Nb Experience Years</label>
-                                            <Input
-                                                name="NbExperienceYears"
-                                                value={formik.values.NbExperienceYears}
-                                                type="number"
-                                                onChange={formik.handleChange}
-                                            />
-                                            {(formik.errors.NbExperienceYears || formik.touched.NbExperienceYears) &&
-                                            <label className="error">
-                                                {formik.errors.NbExperienceYears}
-                                            </label>
-                                            }
-                                        </FormGroup>
-                                    </Col>
-                                    <Col className="pl-1" md="5">
-                                        <FormGroup
-                                            className={formik.errors.Bio && formik.touched.Bio ? "has-danger" : "has-success"}>
-                                            <label>Bio</label>
-                                            <Input
-                                                name="Bio"
-                                                value={formik.values.Bio}
-                                                type="textarea"
-                                                onChange={formik.handleChange}
-                                            />
-                                            {(formik.errors.Bio || formik.touched.Bio) &&
-                                            <label className="error">
-                                                {formik.errors.Bio}
                                             </label>
                                             }
                                         </FormGroup>
@@ -435,16 +373,17 @@ function EditArchitectForm(props) {
                                         <Select
                                             className="react-select primary"
                                             classNamePrefix="react-select"
-                                            name="Type"
-                                            value={formik.values.Type}
-                                            onChange={(value) => formik.setFieldValue("Type", value.value)}
+                                            name="TaxSituation"
+                                            value={formik.values.TaxSituation}
+                                            onChange={(value) => formik.setFieldValue("TaxSituation", value.value)}
                                             options={[
-                                                {value: "Batîment", label: "Batîment"},
-                                                {value: "Géométrique", label: "Géométrique"},
-                                                {value: "Climatique", label: "Climatique"},
+                                                {value: "Intérieur", label: "Intérieur"},
+                                                {value: "Urbaniste", label: "Urbaniste"},
+                                                {value: "Paysagiste", label: "Paysagiste"},
+                                                {value: "Extérieur", label: "Extérieur"},
 
                                             ]}
-                                            placeholder={formik.values.Type}
+                                            placeholder={formik.values.TaxSituation}
                                         />
                                     </Col>
                                     <br/>
@@ -453,61 +392,61 @@ function EditArchitectForm(props) {
                                     <Col className="checkbox-radios" sm="2">
                                         <div className="form-check-radio">
                                             <Label check>
-                                                {formik.values.Gender === "Male" ? (
+                                                {formik.values.Activity === "Deactivated" ? (
                                                     <>
                                                         <Input
                                                             defaultChecked
-                                                            value="Male"
+                                                            value="Deactivated"
                                                             id="exampleRadios11"
-                                                            name="Gender"
+                                                            name="Activity"
                                                             type="radio"
-                                                            onChange={() => formik.setFieldValue("Gender", "Male")}
+                                                            onChange={() => formik.setFieldValue("Activity", "Deactivated")}
                                                         />
                                                     </>
                                                 ) : (
                                                     <>
                                                         <Input
-                                                            value="Male"
+                                                            value="Deactivated"
                                                             id="exampleRadios11"
-                                                            name="Gender"
+                                                            name="Activity"
                                                             type="radio"
-                                                            onChange={() => formik.setFieldValue("Gender", "Male")}
+                                                            onChange={() => formik.setFieldValue("Activity", "Deactivated")}
                                                         />
                                                     </>
                                                 )
                                                 }
 
-                                                Male <span className="form-check-sign"/>
+                                                Deactivated <span className="form-check-sign"/>
                                             </Label>
                                         </div>
                                         <div className="form-check-radio">
                                             <Label check>
-                                                {formik.values.Gender === "Female" ? (
+                                                {formik.values.Activity === "Activated" ? (
                                                     <>
                                                         <Input
                                                             defaultChecked
-                                                            value="Female"
+                                                            value="Activated"
                                                             id="exampleRadios12"
-                                                            name="Gender"
+                                                            name="Activity"
                                                             type="radio"
-                                                            onChange={() => formik.setFieldValue("Gender", "Female")}
+                                                            onChange={() => formik.setFieldValue("Activity", "Activated")}
                                                         />
                                                     </>
 
                                                 ) : (
                                                     <>
                                                         <Input
-                                                            value="Female"
+                                                            value="Activated"
                                                             id="exampleRadios12"
-                                                            name="Gender"
+                                                            name="Activity"
                                                             type="radio"
-                                                            onChange={() => formik.setFieldValue("Gender", "Female")}
+                                                            onChange={() => formik.setFieldValue("Activity", "Activated")}
                                                         />
                                                     </>
                                                 )
                                                 }
 
-                                                Female <span className="form-check-sign"/>
+                                                Activated <span className="form-check-sign"/>
                                             </Label>
                                         </div>
                                     </Col>
@@ -531,15 +470,6 @@ function EditArchitectForm(props) {
 
 
 const YupSchema = Yup.object({
-    Cin: Yup.number("CIN should be a number")
-        .positive("the CIN Number should be positive")
-        .required("CIN is required"),
-    FirstName: Yup.string()
-        .required("First Name is Required"),
-    Username: Yup.string()
-        .required("Username is Required"),
-    LastName: Yup.string()
-        .required("Last Name is Required"),
     Email: Yup.string()
         .email("No valid Email ")
         .required("email is Required"),
@@ -549,4 +479,3 @@ const YupSchema = Yup.object({
     ZipCode: Yup.number("Zip Code should be a number")
         .positive("Zip Code should be Positive"),
 });
-export default EditArchitectForm;

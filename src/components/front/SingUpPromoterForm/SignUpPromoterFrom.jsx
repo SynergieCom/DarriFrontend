@@ -561,7 +561,7 @@ export default function SignUpPromoterForm(props) {
                                         </Box>
                                         <Box paddingBottom={2}>
 
-                                            <Field fullWidth type="text" name="ZipCode" component={TextField}
+                                            <Field fullWidth type="number" name="ZipCode" component={TextField}
                                                    label="ZipCode"
                                                    variant="outlined" InputLabelProps={{
                                                 shrink: true,
